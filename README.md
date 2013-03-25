@@ -3,11 +3,11 @@ smw
 
 social mart widget
 
-Reguires:
-Jquery 1.7.1.js > 
-handlebars.js
-tinySort.jquery.js
-jscrollpane.js
-jquery.mousewheel.js
-twitter.bootstrap.js
+Reguires:  <br/> 
+Jquery 1.7.1.js > <br/>
+handlebars.js<br/>
+tinySort.jquery.js<br/>
+jscrollpane.js<br/>
+jquery.mousewheel.js<br/>
+twitter.bootstrap.js<br/>
 
