@@ -1,0 +1,30 @@
+@import "settings";
+strong{
+  font-weight: 700;
+}
+$images-layout: smart;
+@import "images/*.png";
+
+.smw {
+  font-family: 'museo_sans';
+  width: 593px;
+  border: 1px solid #d4d4d4;
+  text-align: left;
+}
+@import "header";
+
+@import "content";
+
+@import "footer";
+
+@import "jquery.jscrollpane";
+
+.debug{
+  background: indianred;
+  border: 1px solid #000;
+  @include box-sizing(border-box);
+  width: 1000px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}

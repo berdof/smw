@@ -1,0 +1,87 @@
+* {
+  outline: none;
+}
+
+@import "h5bp";
+@import "blankwork";
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/pie";
+@import "compass/css3/images";
+@import "compass/typography";
+@import "compass/layout/grid-background";
+@import "compass/css3/box-sizing";
+@import "compass/utilities/sprites/base";
+
+$pie-behavior: url(PIE.htc);
+
+@mixin spr($map, $ico) {
+  @include images-sprite($ico);
+  height: images-sprite-height($ico);
+  width: images-sprite-width($ico);
+}
+
+@mixin grad($grad) {
+  @include background-image($grad);
+  -pie-background: $grad;
+  background: -ms-#{$grad};
+}
+
+@mixin h-line-height($h) {
+  height: $h;
+  line-height: $h;
+}
+
+.clearfix{
+  @include clearfix;
+}
+
+.db {
+  display: block;
+}
+
+.dib {
+  display: inline-block;
+}
+
+.fl_l {
+  float: left !important;
+}
+
+.fl_r {
+  float: right !important;
+}
+
+.center {
+  overflow: hidden;
+}
+
+.tac {
+  text-align: center;
+}
+
+
+$fontsRoot : 'http://crucer.ru/portf/smw/css/';
+$fontsRoot : 'http://dev2.socialmart.ru/css/';
+$fontsRoot : ' ';
+
+@font-face {
+  font-family: 'museo_sans';
+  src: url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.eot');
+  src: url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.eot?#iefix') format('embedded-opentype'),
+  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.woff') format('woff'),
+  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.ttf') format('truetype'),
+  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.svg#museo_sans_cyrl_500regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EpsilonCTT';
+  src: url($fontsRoot + 'fonts/epsil.eot');
+  src: url($fontsRoot + 'fonts/epsil.eot') format('embedded-opentype'),
+  url($fontsRoot + 'fonts/epsil.woff') format('woff'),
+  url($fontsRoot + 'fonts/epsil.ttf') format('truetype'),
+  url($fontsRoot + 'fonts/epsil.svg#EpsilonCTTNormal') format('svg');
+}

@@ -1,0 +1,31 @@
+.footer{
+  @extend .wrapper;
+}
+
+.smw__footer{
+  cursor: pointer;
+  @include grad(linear-gradient(top, #f6f5ff, #dcfaff));
+  .lt-ie9 &{
+    behavior: none;
+    background: #dcfaff;
+  }
+  @include pie;
+  border-top: 1px solid #dbdbdb;
+  padding: 10px;
+  color: #000;
+  font-size: 15px;
+/*  &:before {
+    content: '';
+    @include spr(images, smw__stuff__trigger2);
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }*/
+}
+
+.smw__stuff__num {
+  color: #0a3069;
+  font-size: 11px;
+  padding: 0 8px 0 0;
+}
