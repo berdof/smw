@@ -392,7 +392,11 @@
 }
 
 .smw__prices__list {
-  height: 208px;
+  overflow: hidden;
+  height: 280px;
+  .jspPane{
+    width: 587px !important;
+  }
 }
 
 .smw__prices__list__l {
@@ -594,11 +598,12 @@ th.smw__prices__item__cost {
   input[type="text"] {
     width: 200px;
     @include box-sizing(border-box);
+    padding: 0 4px;
   }
   input[type="submit"] {
     position: absolute;
     right: 4px;
-    top: 4px;
+    top: 8px;
     @include spr(images, search);
     border: none;
   }

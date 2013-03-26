@@ -23,7 +23,7 @@
 <div class="debug"></div>
 
 <div style="margin: 200px auto" class="smw preload">
-    <div data-plugin-options='{"gadgetName":"Samsung Galaxy SIII"}' class="smw__stuff">
+    <div data-plugin-options='{"gadgetName":"National Geographic NGP5080"}' class="smw__stuff">
         <div class="smw__stuff__in">
             <header class="smw__header">
 
@@ -34,7 +34,7 @@
                     <section class="fl_l">
                         <h2 class="smw__stuff-name">{{name}}</h2>
 
-                        <div>Средняя цена <span class="smw__stuff-price">{{prices.avg}}</span></div>
+                        <div>Средняя цена <span class="smw__stuff-price">{{prices.avg}} руб</span></div>
                     </section>
                     <a class="smw__logo fl_r" href="#"></a>
                 </script>
@@ -62,15 +62,19 @@
                                                     <a class="where-to-buy__trigger" href="#">Москва</a>
 
                                                     <form action="#" class="search">
-                                                        <input type="text" placeholder="Найти город">
+                                                        <input autocomplete="off" data-provide="typeaheadSmwMod"
+                                                               data-items="4"
+                                                               data-source='["Alabama","Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'
+                                                               type="text"
+                                                               placeholder="Найти город">
                                                         <input type="submit" value="">
-                                                        <ul class="where-to-buy__towns">
-                                                            <li><a href="#">Москва</a></li>
-                                                            <li><a href="#">Санкт-Петербург</a></li>
-                                                            <li><a href="#">Красноярск</a></li>
-                                                            <li><a href="#">Новосибирск</a></li>
-                                                            <li><a href="#">Екатеринбург</a></li>
-                                                        </ul>
+                                                        <!--   <ul class="where-to-buy__towns">
+                                                               <li><a href="#">Москва</a></li>
+                                                               <li><a href="#">Санкт-Петербург</a></li>
+                                                               <li><a href="#">Красноярск</a></li>
+                                                               <li><a href="#">Новосибирск</a></li>
+                                                               <li><a href="#">Екатеринбург</a></li>
+                                                           </ul>-->
                                                     </form>
                                                 </div>
                                             </div>
@@ -79,18 +83,6 @@
 
                                     <table class="smw__prices__list__table">
                                         <script data-id="pricesTemplate" type="text/x-handlebars-template">
-
-<!--                                            <thead>
-                                            <tr>
-                                                <th class="smw__prices__list__l">
-                                                    Средняя цена
-                                                </th>
-                                                <th class="smw__prices__item__cost">27 800
-                                                    <small>руб</small>
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>-->
                                             <tbody>
                                             {{#each this}}
                                             <tr class="smw__prices__item">
@@ -119,11 +111,10 @@
 
                                     <div class="smw__impression__head">
                                         <i class="smw__impression__head__rate fl_l">{{avgRate}}</i>
-                                                            <span class="smw__impression__head__mark fl_l">
-                                                                оценок
-                                                                <strong class="db">{{impressions.length}}</strong>
-
-                                                            </span>
+                                        <span class="smw__impression__head__mark fl_l">
+                                            оценок
+                                            <strong class="db">{{impressions.length}}</strong>
+                                        </span>
                                         <a data-redirect='true' class="fl_r btn_dgreen" href="http://dev2.socialmart.ru">Поделиться впечатлением</a>
                                         <ul class="smw__impression__filter center">
                                             <li>Сортировать по:</li>
@@ -137,16 +128,18 @@
                                             <div class="smw__impression__list">
                                                 {{#each impressions}}
                                                 <div data-date={{impression.date}} data-mark={{impression.rating}} data-usefull={{impression.count_like}} class="smw__impression__list__item">
-                                                    <img class="fl_l smw__impression__list__item__ava" src="{{user.profileUrl}}" alt=""/>
+                                                    <img class="fl_l smw__impression__list__item__ava" src="{{user.pic}}" alt=""/>
 
                                                     <div class="center">
                                                         <span class="smw__impression__list__item__rate">{{impression.rating}}</span>
 
-                                                        <a class="smw__impression__list__item__name" href="{{user.pic}}">{{user.name}} -
-                                                            <i class={{classN}}></i></a>
+                                                        <a class="smw__impression__list__item__name" href="{{user.profileUrl}}">
+                                                            {{user.name}} -
+                                                            <i class={{classN}}></i>
+                                                            </a>
 
                                                         <p class="smw__impression__list__item__text">{{impression.text}}</p>
-                                                        <span class="smw__impression__list__item__date">{{impression.dateFormated}} назад</span>
+                                                        <span class="smw__impression__list__item__date">{{impression.date_h}}</span>
                                                         <ul class="smw__impression__list__item__nav">
                                                             <li><a class="smw__impression__list__item__tu" href="#">{{impression.count_like}}</a></li>
                                                             <li><a class="smw__impression__list__item__td" href="#">{{impression.count_dislike}}</a></li>
@@ -218,6 +211,8 @@
 <script src="js/libs/jquery.jscrollpane.min.js"></script>
 <script src="js/libs/jquery.tinySort.jquery.js"></script>
 
+<script src="js/libs/typeaheadSmwMod.jquery.js"></script>
+
 <script src="js/libs/jquery.mousewheel.js"></script>
 <script src="js/libs/handlebars.js"></script>
 <script src="js/plugins.js"></script>
@@ -225,6 +220,9 @@
 <script src="js/smw.js"></script>
 <script type="text/javascript">
     $('.smw__stuff').SocialMart();
+    /* setTimeout(function(){
+     $('.where-to-buy__trigger').trigger('click')
+     }, 500)*/
 </script>
 </body>
 </html>
