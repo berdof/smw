@@ -237,15 +237,5 @@
     /* TYPEAHEAD DATA-API
      * ================== */
 
-    $(function () {
-        $('body').on('focus.typeaheadSmwMod.data-api', '[data-provide="typeaheadSmwMod"]', function (e) {
-            var $this = $(this)
-            if ($this.data('typeaheadSmwMod')) return
-            e.preventDefault()
-            $this.typeaheadSmwMod($this.data())
-
-
-        })
-    })
 
 }(window.jQuery);

@@ -30,7 +30,7 @@
         defaults: {
             gadgetName: null,
             urlModels: 'http://dev2.socialmart.ru/widget/get/model',
-            urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
+            urlRegions: 'http://socialmart.ru/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург']
 
         },
@@ -107,7 +107,7 @@
 
             self.fetchRegionsData().done(function (data) {
 
-                self.fillRegions(self.config.defaultRegions)
+                self.fillRegions(data)
 
             })
 
@@ -129,7 +129,17 @@
         },
 
         fillRegions: function (regions) {
-            //        $('.where-to-buy input[type=text]').typeaheadSmwMod({source: regions})
+            regionsArr = [];
+            $.each(regions, function (d) {
+                regionsArr.push(this.region);
+            });
+            //todo: add keys functionality
+            //add
+            this.$elem.find('.search input[type=text]').typeaheadSmwMod({
+                source: regionsArr,
+                items: 4
+            });
+
         },
 
         fetchRegionsData: function () {
@@ -139,7 +149,7 @@
                 url: self.config.urlRegions + "?jsonp=?",
                 dataType: 'jsonp',
                 success: function (d) {
-                    //console.log(d);
+
                 }
             });
         },
@@ -158,19 +168,18 @@
                         curDate = new Date(),
                         daysDiff,
                         rate = 0;
-
-                    console.log(data);
+                    console.log(self.config.urlModels + "/impressions?region=1&model=" + self.gadgetId + "&jsonp=?");
                     $.each(data.impressions, function () {
                         rate += ~~this.impression.rating;
-                        console.log(this);
-
                         this.classN = this.is_have === 1 ?
                             self.classNames.hasIco :
-                            self.classNames.likeIco ;
+                            self.classNames.likeIco;
+
+                    //    this.impression.date = new Date(this.impression.date).getTime();
 
                     })
                     //todo: floor avg to tens like 5.2
-                    data.avgRate =  rate / data.impressions.length;
+                    data.avgRate = rate / data.impressions.length;
                     self.impressionsCount = data.impressions.length;
 
                 }
@@ -190,6 +199,7 @@
                 url: self.config.urlModels + '/prices?region=1&model=' + self.gadgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
+
                     d.offers.map(function (offer) {
                         offer.price = offer.price.toString().replace('руб', '');
                     })
@@ -200,14 +210,16 @@
         },
         fetchInfoData: function () {
             var self = this;
-            console.log(this.config.urlModels + '/description?region=1&model=' + self.gadgetId + '&jsonp=?');
-            return $.ajax({
-                url: this.config.urlModels + '/description?region=1&model=' + self.gadgetId + '&jsonp=?',
+            return $.getJSON('http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?', function (json) {
+
+            });
+            /*return $.ajax({
+                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?',
                 dataType: 'jsonp',
-                success:function(){
+                success: function () {
                     console.log(this);
                 }
-            });
+            });*/
         },
         fillTabsNav: function (data, tabsNavTemplateId) {
             this.fillFrag(data, tabsNavTemplateId, '.' + this.classNames.tabsNav);
@@ -381,6 +393,7 @@
             //todo:jscroolpane do not create each time
             $('.smw__impression__list-sort').jScrollPane();
             $('.smw__prices__list').jScrollPane();
+            $('.smw__info-wrap-scroll').jScrollPane();
 
         },
         //!event handlers

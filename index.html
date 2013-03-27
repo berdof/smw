@@ -23,7 +23,7 @@
 <div class="debug"></div>
 
 <div style="margin: 200px auto" class="smw preload">
-    <div data-plugin-options='{"gadgetName":"National Geographic NGP5080"}' class="smw__stuff">
+    <div data-plugin-options='{"gadgetName":"Apple iPhone 5 16Gb"}' class="smw__stuff">
         <div class="smw__stuff__in">
             <header class="smw__header">
 
@@ -64,8 +64,7 @@
                                                     <form action="#" class="search">
                                                         <input autocomplete="off" data-provide="typeaheadSmwMod"
                                                                data-items="4"
-                                                               data-source='["Alabama","Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'
-                                                               type="text"
+                                                                type="text"
                                                                placeholder="Найти город">
                                                         <input type="submit" value="">
                                                         <!--   <ul class="where-to-buy__towns">
@@ -156,11 +155,11 @@
                             </div>
                         </div>
                         <div class="smw__tab__contents__item">
-                            <div class="smw__info-wrap">
+                            <div class="smw__info-wrap-scroll"><div class="smw__info-wrap">
                                 <script data-id="infoTemplate" type="text/x-handlebars-template">
 
                                     <div class="clearfix">
-                                        {{#each items}}
+                                        {{#each this}}
                                         <div class="smw__info">
                                             <span class="smw__info__name">{{key}}</span>
 
@@ -183,7 +182,7 @@
                                     Данные -
                                     <a href="#"> Яндекс.Маркет</a>
                                 </div>
-                            </div>
+                            </div></div>
                         </div>
                     </div>
                 </div>

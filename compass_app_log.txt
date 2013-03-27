@@ -77,3 +77,16 @@ Load paths:
 2013-03-26 11:34:10 overwrite css/style.css 
 2013-03-26 11:38:47 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
 2013-03-26 11:38:48 overwrite css/style.css 
+2013-03-26 21:14:08 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-26 21:14:10 overwrite css/style.css 
+2013-03-27 16:19:35 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-27 16:19:36 identical css/style.css 
+2013-03-27 16:19:36 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-27 16:19:37 overwrite css/style.css 
+2013-03-27 16:19:40 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-27 16:19:40     error sass/style.scss (Line 691 of sass/_content.scss: Invalid CSS after "  height: ": expected expression (e.g. 1px, bold), was ";")
+2013-03-27 16:19:40 overwrite css/style.css 
+2013-03-27 16:19:47 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-27 16:19:48 overwrite css/style.css 
+2013-03-27 16:20:47 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-27 16:20:48 overwrite css/style.css 

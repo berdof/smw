@@ -613,6 +613,7 @@ th.smw__prices__item__cost {
   @extend .nav;
   margin-top: -1px;
   li {
+    overflow: hidden;
     display: block;
     background: none;
     float: none;
@@ -686,6 +687,9 @@ th.smw__prices__item__cost {
   }
 }
 
+.smw__info-wrap-scroll{
+  height: 280px;
+}
 .redirect {
   display: none;
   overflow: hidden;
