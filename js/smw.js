@@ -29,8 +29,8 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://dev2.socialmart.ru/widget/get/model',
-            urlRegions: 'http://socialmart.ru/widget/get/regions',
+            urlModels: 'http://socialmart.ru/widget/get/model',
+            urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург']
 
         },
@@ -175,7 +175,7 @@
                             self.classNames.hasIco :
                             self.classNames.likeIco;
 
-                    //    this.impression.date = new Date(this.impression.date).getTime();
+                       this.impression.date = new Date(this.impression.date).getTime();
 
                     })
                     //todo: floor avg to tens like 5.2

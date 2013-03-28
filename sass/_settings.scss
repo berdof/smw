@@ -60,28 +60,3 @@ $pie-behavior: url(PIE.htc);
 .tac {
   text-align: center;
 }
-
-
-$fontsRoot : 'http://crucer.ru/portf/smw/css/';
-$fontsRoot : 'http://dev2.socialmart.ru/css/';
-$fontsRoot : ' ';
-
-@font-face {
-  font-family: 'museo_sans';
-  src: url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.eot');
-  src: url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.eot?#iefix') format('embedded-opentype'),
-  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.woff') format('woff'),
-  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.ttf') format('truetype'),
-  url($fontsRoot + 'fonts/exljbris_-_museosanscyrl-500-webfont.svg#museo_sans_cyrl_500regular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'EpsilonCTT';
-  src: url($fontsRoot + 'fonts/epsil.eot');
-  src: url($fontsRoot + 'fonts/epsil.eot') format('embedded-opentype'),
-  url($fontsRoot + 'fonts/epsil.woff') format('woff'),
-  url($fontsRoot + 'fonts/epsil.ttf') format('truetype'),
-  url($fontsRoot + 'fonts/epsil.svg#EpsilonCTTNormal') format('svg');
-}
