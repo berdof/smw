@@ -21,6 +21,8 @@
   color: #0a3069 !important;
   font-size: 19px !important;
   padding: 9px 0;
+  max-width: 390px;
+  overflow: hidden;
 }
 
 .smw__stuff-img-wrap {
@@ -34,6 +36,7 @@
   display: table-cell;
   background: #fff;
   max-width: 102px;
+  min-width: 92px;
   vertical-align: middle;
   text-align: center;
   height: 51px;

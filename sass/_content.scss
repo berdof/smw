@@ -113,6 +113,7 @@
 .smw__info__name {
   display: block;
   color: #666;
+  font-weight: 700;
 }
 
 .smw__info__value {
@@ -392,7 +393,11 @@
 }
 
 .smw__prices__list {
-  height: 208px;
+  overflow: hidden;
+  height: 280px;
+  .jspPane{
+    width: 587px !important;
+  }
 }
 
 .smw__prices__list__l {
@@ -433,6 +438,9 @@
     background: #fff;
     padding: 0 0 0 10px;
     @include transition(all 0.3s);
+    &:first-child{
+      width: 405px;
+    }
   }
   small {
     font-size: 10px;
@@ -594,11 +602,12 @@ th.smw__prices__item__cost {
   input[type="text"] {
     width: 200px;
     @include box-sizing(border-box);
+    padding: 0 4px;
   }
   input[type="submit"] {
     position: absolute;
     right: 4px;
-    top: 4px;
+    top: 8px;
     @include spr(images, search);
     border: none;
   }
@@ -608,6 +617,7 @@ th.smw__prices__item__cost {
   @extend .nav;
   margin-top: -1px;
   li {
+    overflow: hidden;
     display: block;
     background: none;
     float: none;
@@ -679,8 +689,24 @@ th.smw__prices__item__cost {
     position: relative;
     top: -11px;
   }
+  .smw__prices__list__head &{
+    position: relative;
+    top: -4px;
+    padding-right: 20px;
+  }
 }
 
+.smw__info-wrap-scroll{
+  height: 280px;
+
+}
+
+.smw__prices__list-scroll{
+  height: 250px;
+  width: 593px !important;
+  position: relative;
+  top: -10px;
+}
 .redirect {
   display: none;
   overflow: hidden;
@@ -692,6 +718,8 @@ th.smw__prices__item__cost {
   z-index: 10;
   background: #fff;
 }
+
+
 
 .redirect__head {
   @extend .smw__impression__head;
