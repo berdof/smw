@@ -168,14 +168,15 @@
                         curDate = new Date(),
                         daysDiff,
                         rate = 0;
-                    console.log(self.config.urlModels + "/impressions?region=1&model=" + self.gadgetId + "&jsonp=?");
+
                     $.each(data.impressions, function () {
                         rate += ~~this.impression.rating;
                         this.classN = this.is_have === 1 ?
                             self.classNames.hasIco :
                             self.classNames.likeIco;
-
+                        //todo: fix firefox Date NaN bug
                         this.impression.date = new Date(this.impression.date).getTime();
+
 
                     })
                     //todo: floor avg to tens like 5.2
@@ -316,12 +317,12 @@
                 $.data(el, 'h', iY);
                 if (i === 1) iLnH = iY;
             });
-            containerItem.tsort('', {data: sortType, order: 'desc'}).each(function (i, el) {
+            containerItem.tsort('', {data: sortType, order: 'desc'})/*.each(function (i, el) {
                 var $El = $(el);
                 var iFr = $.data(el, 'h');
                 var iTo = i * iLnH;
                 $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
-            });
+            });*/
 
 
             /*          plugin.$elem.find('.smw__impression__list__item')

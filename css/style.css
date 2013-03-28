@@ -35,7 +35,7 @@ strong { font-weight: 700; }
 
 .images-sprite, .smw__logo, .smw__tab__nav__info:before, .smw__tab__nav__reviews:before, .smw__tab__nav__prices:before, .smw__impression__head__rate, .smw__impression__head__rate_empty, .smw__impression__list__item__has, .smw__impression__list__item__like, .smw__impression__list__item__rate:before, .smw__impression__list__item__tu:before, .smw__impression__list__item__td:before, .smw__impression__list__item__comments:before, .smw__impression__list__item__tu:hover:before, .smw__impression__list__item__tu:active:before, .smw__impression__list__item__td:hover:before, .smw__impression__list__item__td:active:before, .smw__prices__buy:before, .where-to-buy input[type="submit"], .logo { background: url('../images/images-s7f400d24e1.png') no-repeat; }
 
-.smw { font-family: 'Arial'; width: 593px; border: 1px solid #d4d4d4; text-align: left; }
+.smw { font-family: Tahoma; width: 593px; border: 1px solid #d4d4d4; text-align: left; }
 
 .smw__header { background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f4f4f4), color-stop(100%, #f5f5f5)); background-image: -webkit-linear-gradient(top, #f4f4f4, #f5f5f5); background-image: -moz-linear-gradient(top, #f4f4f4, #f5f5f5); background-image: -o-linear-gradient(top, #f4f4f4, #f5f5f5); background-image: linear-gradient(top, #f4f4f4, #f5f5f5); -pie-background: linear-gradient(top, #f4f4f4, #f5f5f5); background: -ms-linear-gradient(top, #f4f4f4, #f5f5f5); behavior: url(PIE.htc); position: relative; padding: 5px 20px 5px 7px; color: #000; font-size: 14px; border-bottom: 1px solid #e1e1e1; }
 .lt-ie9 .smw__header { behavior: none; background: #f5f5f5; }
