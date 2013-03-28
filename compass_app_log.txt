@@ -218,3 +218,5 @@ Load paths:
 2013-03-28 13:07:43 overwrite css/style.css 
 2013-03-28 13:07:47 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
 2013-03-28 13:07:47 overwrite css/style.css 
+2013-03-28 13:20:12 unchanged D:/work/SocialMart/widget/html/images/images-s7f400d24e1.png
+2013-03-28 13:20:12 identical css/style.css 
