@@ -175,11 +175,12 @@
                             self.classNames.hasIco :
                             self.classNames.likeIco;
 
-                       this.impression.date = new Date(this.impression.date).getTime();
+                        this.impression.date = new Date(this.impression.date).getTime();
 
                     })
                     //todo: floor avg to tens like 5.2
-                    data.avgRate = rate / data.impressions.length;
+                    data.avgRate = (rate / data.impressions.length).toFixed(1);
+
                     self.impressionsCount = data.impressions.length;
 
                 }
@@ -214,12 +215,12 @@
 
             });
             /*return $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?',
-                dataType: 'jsonp',
-                success: function () {
-                    console.log(this);
-                }
-            });*/
+             url: 'http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?',
+             dataType: 'jsonp',
+             success: function () {
+             console.log(this);
+             }
+             });*/
         },
         fillTabsNav: function (data, tabsNavTemplateId) {
             this.fillFrag(data, tabsNavTemplateId, '.' + this.classNames.tabsNav);
@@ -344,17 +345,16 @@
         /** !helpers**/
 
         /**event handlers**/
-        toggleRedirectPopup: function (speed, toLink) {
+        toggleRedirectPopup: function (speed, toLink, effect) {
             //todo: change to $elem link
-            $('.smw .redirect')
-                .fadeToggle(speed || 200)
+            $('.smw .redirect')[effect||'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
         },
         redirectLinkHandler: function (e) {
             e.preventDefault();
             var self = e.data.self,
                 href = $(this).attr('href');
-            self.toggleRedirectPopup(200, href);
+            self.toggleRedirectPopup(200, href,"fadeToggle");
 
         },
         footerClickHandler: function (e) {
@@ -381,19 +381,21 @@
             tabsLi.siblings('li').find('a').removeClass('active');
             $(this).addClass('active');
 
-
             self.initScroll();
 
-
             $("*[data-sort-type=date]").trigger('click')
+
+            self.toggleRedirectPopup(200, "","fadeOut");
             e.preventDefault();
         },
         initScroll: function () {
             var self = this;
             //todo:jscroolpane do not create each time
             $('.smw__impression__list-sort').jScrollPane();
-            $('.smw__prices__list').jScrollPane();
             $('.smw__info-wrap-scroll').jScrollPane();
+
+            $('.smw__prices__list-scroll').jScrollPane();
+
 
         },
         //!event handlers

@@ -438,6 +438,9 @@
     background: #fff;
     padding: 0 0 0 10px;
     @include transition(all 0.3s);
+    &:first-child{
+      width: 405px;
+    }
   }
   small {
     font-size: 10px;
@@ -686,10 +689,23 @@ th.smw__prices__item__cost {
     position: relative;
     top: -11px;
   }
+  .smw__prices__list__head &{
+    position: relative;
+    top: -4px;
+    padding-right: 20px;
+  }
 }
 
 .smw__info-wrap-scroll{
   height: 280px;
+
+}
+
+.smw__prices__list-scroll{
+  height: 250px;
+  width: 593px !important;
+  position: relative;
+  top: -10px;
 }
 .redirect {
   display: none;
@@ -702,6 +718,8 @@ th.smw__prices__item__cost {
   z-index: 10;
   background: #fff;
 }
+
+
 
 .redirect__head {
   @extend .smw__impression__head;

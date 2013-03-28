@@ -24,3 +24,4 @@ javascripts_dir = "js"
 preferred_syntax = :scss
 
 line_comments = false # by Compass.app 
+output_style = :compact # by Compass.app 
