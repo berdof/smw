@@ -29,10 +29,11 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://socialmart.ru/widget/get/model',
+            urlModels: 'http://dev2.socialmart.ru/widget/get/model',
             urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
-            defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург']
-
+            defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
+            userRegion: 1,
+            disableRegionSelection: true
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -69,6 +70,7 @@
                 this.metadata);
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
+            self.userRegion = this.config.userRegion;
 
             self.getGadgetId(this.config.gadgetName).done(function (data) {
                 self.gadgetId = data.model_id;
@@ -78,7 +80,6 @@
         },
         //fires after we get the gadget id to work with data
         init: function (self, $self) {
-
             this.ieFix();
             //generate template
             this.render();
@@ -106,9 +107,7 @@
 
 
             self.fetchRegionsData().done(function (data) {
-
-                self.fillRegions(data)
-
+                self.fillRegions(data);
             })
 
             this.attachEvents();
@@ -117,8 +116,9 @@
             //todo: fade this
             $('.' + self.classNames.stuff + ':first .' + self.classNames.footer).trigger('click');
 
+            if (self.config.disableRegionSelection)
+                self.$elem.find('.where-to-buy').hide();
 
-            // this.setTabsEqualHeight();
             return this;
         },
         getGadgetId: function (name) {
@@ -161,7 +161,7 @@
 
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + "/impressions?region=1&model=" + self.gadgetId + "&jsonp=?",
+                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
                     var myDate ,
@@ -191,14 +191,14 @@
         fetchHeaderData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/info?region=1&model=' + self.gadgetId + '&jsonp=?',
+                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
                 dataType: 'jsonp'
             });
         },
         fetchPricesData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/prices?region=1&model=' + self.gadgetId + '&jsonp=?',
+                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
 
@@ -212,22 +212,18 @@
         },
         fetchInfoData: function () {
             var self = this;
-            return $.getJSON('http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?', function (json) {
-
+            return $.ajax({
+                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
+                dataType: 'jsonp',
+                success: function () {
+                    console.log(this);
+                }
             });
-            /*return $.ajax({
-             url: 'http://dev2.socialmart.ru/widget/get/model/description?region=1&model=8454852&jsonp=?',
-             dataType: 'jsonp',
-             success: function () {
-             console.log(this);
-             }
-             });*/
         },
         fillTabsNav: function (data, tabsNavTemplateId) {
             this.fillFrag(data, tabsNavTemplateId, '.' + this.classNames.tabsNav);
         },
         fillInfo: function (data, infoTemplateId) {
-            //console.log(data);
             this.fillFrag(data, infoTemplateId, '.' + this.classNames.info);
         },
         fillPrices: function (data, pricesTemplateId) {
@@ -248,14 +244,9 @@
         //fragId = class or id of DOM element where render the data
         fillFrag: function (data, templateId, fragId) {
 
-            var template = Handlebars.compile(this.$elem.find('script[data-id=' + templateId + ']').html());
-            var html = template(data);
-
-            setTimeout(function () {
-                //todo: change this setTimeout to differed or delete)
-                $(fragId).html(html)
-            }, 500)
-
+            var template = Handlebars.compile(this.$elem.find('script[data-id=' + templateId + ']').html()),
+                html = template(data);
+            this.$elem.find(fragId).html(html)
         },
         //rendering html contents
         render: function () {
@@ -291,7 +282,6 @@
             self.$elem.on('click', '.where-to-buy__trigger', {self: self }, self.shownTownFilterHandler);
 
             self.$elem.on('keyup', '.where-to-buy input[type=text]', {self: self }, self.searchTownTextHandler)
-            //http://dev2.socialmart.ru/widget/get/regions
 
 
         },
@@ -317,17 +307,18 @@
                 $.data(el, 'h', iY);
                 if (i === 1) iLnH = iY;
             });
-            containerItem.tsort('', {data: sortType, order: 'desc'})/*.each(function (i, el) {
-                var $El = $(el);
-                var iFr = $.data(el, 'h');
-                var iTo = i * iLnH;
-                $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
-            });*/
+            containerItem.tsort('', {data: sortType, order: 'desc'})
+            /*   .each(function (i, el) {
+             var $El = $(el);
+             var iFr = $.data(el, 'h');
+             var iTo = i * iLnH;
+             $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
+             });
 
-
-            /*          plugin.$elem.find('.smw__impression__list__item')
-             .tsort('',{data:sortType,order:'desc'});*/
+             plugin.$elem.find('.smw__impression__list__item')
+             .tsort('', {data: sortType, order: 'desc'});*/
         },
+
         sortImpressionsHandler: function (e) {
             //todo: write sorter
             var self = $(this) ,
@@ -348,14 +339,14 @@
         /**event handlers**/
         toggleRedirectPopup: function (speed, toLink, effect) {
             //todo: change to $elem link
-            $('.smw .redirect')[effect||'fadeToggle'](speed || 200)
+            $('.smw .redirect')[effect || 'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
         },
         redirectLinkHandler: function (e) {
             e.preventDefault();
             var self = e.data.self,
                 href = $(this).attr('href');
-            self.toggleRedirectPopup(200, href,"fadeToggle");
+            self.toggleRedirectPopup(200, href, "fadeToggle");
 
         },
         footerClickHandler: function (e) {
@@ -381,25 +372,21 @@
             tabItems.hide().eq(tabIndex).show();
             tabsLi.siblings('li').find('a').removeClass('active');
             $(this).addClass('active');
-
             self.initScroll();
-
             $("*[data-sort-type=date]").trigger('click')
 
-            self.toggleRedirectPopup(200, "","fadeOut");
+            self.toggleRedirectPopup(200, "", "fadeOut");
             e.preventDefault();
         },
         initScroll: function () {
-            var self = this;
-            //todo:jscroolpane do not create each time
-            $('.smw__impression__list-sort').jScrollPane();
-            $('.smw__info-wrap-scroll').jScrollPane();
-
-            $('.smw__prices__list-scroll').jScrollPane();
+            this.$elem.find(
+                '.smw__impression__list-sort,' +
+                    ' .smw__info-wrap-scroll, ' +
+                    '.smw__prices__list-scroll').jScrollPane();
 
 
         },
-        //!event handlers
+        /**!event handlers**/
         ieFix: function () {
             //todo: add ie class and delete pseudo comments
         }

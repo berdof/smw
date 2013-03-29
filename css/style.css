@@ -139,7 +139,7 @@ strong { font-weight: 700; }
 .smw__impression__list__item__nav li:last-child { padding-right: 0; }
 .smw__impression__list__item__nav li.last { padding-right: 0; }
 
-.smw__impression__list__item__tu, .smw__impression__list__item__td, .smw__impression__list__item__comments { display: block; color: #171717 !important; text-decoration: none !important; font-size: 12px !important; line-height: 13px; padding: 0 0 0 15px; position: relative; }
+.smw__impression__list__item__tu, .smw__impression__list__item__td, .smw__impression__list__item__comments { display: block; color: #171717 !important; text-decoration: none !important; font-size: 12px !important; line-height: 13px; padding: 0 0 0 15px; position: relative; cursor: default; }
 .smw__impression__list__item__tu:before, .smw__impression__list__item__td:before, .smw__impression__list__item__comments:before { content: ''; position: absolute; left: 0; top: 0; display: block; background-position: -23px 0; height: 13px; width: 12px; }
 
 .smw__impression__list__item__tu:before { background-position: -23px 0; height: 13px; width: 12px; }

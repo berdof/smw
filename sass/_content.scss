@@ -299,6 +299,7 @@
   line-height: images-sprite-height(smw__review__list__item__tu);
   padding: 0 0 0 15px;
   position: relative;
+  cursor: default;
   &:before {
     content: '';
     position: absolute;
