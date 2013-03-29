@@ -29,8 +29,8 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://dev2.socialmart.ru/widget/get/model',
-            urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
+            urlModels: 'http://socialmart.ru/widget/get/model',
+            urlRegions: 'http://socialmart.ru/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
             userRegion: 1,
             disableRegionSelection: true,
@@ -71,23 +71,24 @@
         },
 
         appendLibraries: function () {
-            var self = this;
-            $.each(self.defaults.scriptsListPath, function (i, link) {
-                self.$elem.append($('<script/>', {
-                    'src': link
+            var self = this,
+                parent = self.$elem.parent();
+            if (parent.hasClass('preload')) {
+                $.each(self.defaults.scriptsListPath, function (i, link) {
+                    $('body').prepend($('<script src="'+link+'"></script>'));
+                })
+                $('head').prepend($('<link/>', {
+                    'href': self.defaults.cssLinkPath,
+                    'rel': 'stylesheet'
                 }));
-            })
-            $('head').prepend($('<link/>', {
-                'href': self.defaults.cssLinkPath,
-                'rel':'stylesheet'
-            }));
+            }
+            parent.removeClass('preload')
         },
         create: function () {
             var self = this,
                 $self = this.$elem;
             self.config = $.extend({}, this.defaults, this.options,
                 this.metadata);
-
             self.appendLibraries();
 
             self.gadgetName = this.config.gadgetName;
@@ -97,6 +98,7 @@
             self.getGadgetId(this.config.gadgetName).done(function (data) {
                 self.gadgetId = data.model_id;
                 self.init(self, $self);
+                console.log(self.gadgetId);
             });
 
         },
@@ -413,8 +415,8 @@
         /**!event handlers**/
         ieFix: function () {
             //todo: add ie class and delete pseudo comments
-            var browser =$.browser;
-            if( browser.msie&& (browser.version == 8 ||browser.version == 7) ){
+            var browser = $.browser;
+            if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.addClass('lt-ie9');
             }
         }
