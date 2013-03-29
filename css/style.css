@@ -230,7 +230,7 @@ th.smw__prices__item__cost { font-size: 15px !important; color: #000; }
 
 .smw__prices__list-scroll { height: 250px; width: 593px !important; position: relative; top: -10px; }
 
-.redirect { display: none; overflow: hidden; position: absolute; left: 0; bottom: 0; width: 100%; height: 280px; z-index: 10; background: #fff; }
+.smwRedirect { display: none; overflow: hidden; position: absolute; left: 0; bottom: 0; width: 100%; height: 280px; z-index: 10; background: #fff; }
 
 .redirect__head { padding-bottom: 12px; }
 

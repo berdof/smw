@@ -33,7 +33,16 @@
             urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
             userRegion: 1,
-            disableRegionSelection: true
+            disableRegionSelection: true,
+            scriptsListPath: [
+                'js/libs/jquery.jscrollpane.min.js',
+                'js/libs/jquery.tinySort.jquery.js',
+                'js/libs/typeaheadSmwMod.jquery.js',
+                'js/libs/jquery.mousewheel.js',
+                'js/libs/handlebars.js',
+                'js/smwVievs.js'
+            ],
+            cssLinkPath: 'css/style.css'
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -51,8 +60,6 @@
             info: 'smw__info-wrap',
             likeIco: 'smw__impression__list__item__like',
             hasIco: 'smw__impression__list__item__has'
-
-
         },
         //template IDs
         templateNames: {
@@ -63,11 +70,26 @@
             tabsNav: 'tabsNavTemplate'
         },
 
+        appendLibraries: function () {
+            var self = this;
+            $.each(self.defaults.scriptsListPath, function (i, link) {
+                self.$elem.append($('<script/>', {
+                    'src': link
+                }));
+            })
+            $('head').prepend($('<link/>', {
+                'href': self.defaults.cssLinkPath,
+                'rel':'stylesheet'
+            }));
+        },
         create: function () {
             var self = this,
                 $self = this.$elem;
             self.config = $.extend({}, this.defaults, this.options,
                 this.metadata);
+
+            self.appendLibraries();
+
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
             self.userRegion = this.config.userRegion;
@@ -83,6 +105,7 @@
             this.ieFix();
             //generate template
             this.render();
+
             self.$footer = $self.find('.' + self.classNames.footer);
             self.$tabsNavItem = $self.find('.' + self.classNames.tabsNavItem);
 
@@ -90,25 +113,25 @@
             self.fetchHeaderData().done(function (data) {
 
                 self.fillHeader(data, self.templateNames.header);
-            })
+            });
             self.fetchPricesData().done(function (data) {
                 self.fillPrices(data.offers, self.templateNames.prices);
-            })
+            });
             self.fetchImpressionsData().done(function (data) {
                 self.fillImpressions(data, self.templateNames.impressions);
-            })
+            });
             self.fetchInfoData().done(function (data) {
 
                 self.fillInfo(data, self.templateNames.info);
                 //when last tab item is rendered and filled with data then fill tabs nav info(counters)
                 //todo: fix async problem
                 self.fillTabsNav(self.fetchTabsNavData(), self.templateNames.tabsNav);
-            })
+            });
 
 
             self.fetchRegionsData().done(function (data) {
                 self.fillRegions(data);
-            })
+            });
 
             this.attachEvents();
 
@@ -130,7 +153,7 @@
 
         fillRegions: function (regions) {
             regionsArr = [];
-            $.each(regions, function (d) {
+            $.each(regions, function () {
                 regionsArr.push(this.region);
             });
             //todo: add keys functionality
@@ -164,10 +187,7 @@
                 url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
-                    var myDate ,
-                        curDate = new Date(),
-                        daysDiff,
-                        rate = 0;
+                    var rate = 0;
 
                     $.each(data.impressions, function () {
                         rate += ~~this.impression.rating;
@@ -178,7 +198,7 @@
                         this.impression.date = new Date(this.impression.date).getTime();
 
 
-                    })
+                    });
                     //todo: floor avg to tens like 5.2
                     data.avgRate = (rate / data.impressions.length).toFixed(1);
 
@@ -202,7 +222,7 @@
                 dataType: 'jsonp',
                 success: function (d) {
 
-                    d.offers.map(function (offer) {
+                    $.map(d.offers, function (offer) {
                         offer.price = offer.price.toString().replace('руб', '');
                     })
                     self.priceCount = d.offers.length;
@@ -250,15 +270,25 @@
         },
         //rendering html contents
         render: function () {
-            this.renderHeader();
-            this.renderBody();
-            this.renderFooter();
+            var self = this;
+            self.$elem.html(smwSkeleton)
+            self.renderHeader()
+            self.renderBody()
+            self.renderFooter();
         },
         renderHeader: function () {
-            //todo: render template head asdasd
+            this.$elem.find('.smw__stuff__in').prepend(smwHeader);
+            //todo: render template head
         },
         renderBody: function () {
             //todo: render template body
+            var $elem = this.$elem;
+            $elem.find('.smw__tab').prepend(smwTabNav);
+            $elem.find('.smw__prices__list').prepend(smwPriceHead);
+            $elem.find('.smw__prices__list').append(smwPriceList);
+            $elem.find('.smw__tab').append(smwRedirect);
+            $elem.find('.smw__impression').prepend(smwImpressions);
+            $elem.find('.smw__info-wrap-scroll').prepend(smwInfo);
         },
         renderFooter: function () {
             this.$elem.append($('<footer/>', {
@@ -273,17 +303,11 @@
             var self = this;
             self.$elem.on('click', '.smw__tab__nav a', {self: self }, self.tabsItemClickHandler);
             self.$footer.on('click', {self: self}, this.footerClickHandler);
-
             self.$elem.on('click', 'a[data-redirect=true]', {self: self }, self.redirectLinkHandler);
             self.$elem.on('click', '.redirect__back', {self: self }, self.toggleRedirectPopup);
             self.$elem.on('click', '.' + self.classNames.impressionsFilterLink, {self: self }, self.sortImpressionsHandler);
-
-
             self.$elem.on('click', '.where-to-buy__trigger', {self: self }, self.shownTownFilterHandler);
-
             self.$elem.on('keyup', '.where-to-buy input[type=text]', {self: self }, self.searchTownTextHandler)
-
-
         },
 
         searchTownTextHandler: function (e) {
@@ -299,7 +323,7 @@
         /**helpers**/
         sorter: function (plugin, container, containerItem, sortType) {
 
-            containerItem.css({'position': 'relative', 'top': 0})
+            containerItem.css({'position': 'relative', 'top': 0});
             container.css({position: 'relative', height: container.height(), display: 'block'});
             var iLnH;
             containerItem.each(function (i, el) {
@@ -307,7 +331,7 @@
                 $.data(el, 'h', iY);
                 if (i === 1) iLnH = iY;
             });
-            containerItem.tsort('', {data: sortType, order: 'desc'})
+            containerItem.tsort('', {data: sortType, order: 'desc'});
             /*   .each(function (i, el) {
              var $El = $(el);
              var iFr = $.data(el, 'h');
@@ -339,7 +363,7 @@
         /**event handlers**/
         toggleRedirectPopup: function (speed, toLink, effect) {
             //todo: change to $elem link
-            $('.smw .redirect')[effect || 'fadeToggle'](speed || 200)
+            $('.smw .smwRedirect')[effect || 'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
         },
         redirectLinkHandler: function (e) {
@@ -373,7 +397,7 @@
             tabsLi.siblings('li').find('a').removeClass('active');
             $(this).addClass('active');
             self.initScroll();
-            $("*[data-sort-type=date]").trigger('click')
+            $("*[data-sort-type=date]").trigger('click');
 
             self.toggleRedirectPopup(200, "", "fadeOut");
             e.preventDefault();
@@ -389,8 +413,11 @@
         /**!event handlers**/
         ieFix: function () {
             //todo: add ie class and delete pseudo comments
+            var browser =$.browser;
+            if( browser.msie&& (browser.version == 8 ||browser.version == 7) ){
+                this.$elem.addClass('lt-ie9');
+            }
         }
-
     };
 
     SocialMart.defaults = SocialMart.prototype.defaults;
