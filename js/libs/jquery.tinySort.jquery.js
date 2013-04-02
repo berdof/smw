@@ -185,7 +185,7 @@
 					,oSettings = $.extend({}, $.tinysort. defaults, aSettings[i])
 					// has find, attr or data
 					,bFind = !(!sFind||sFind=='')
-					// since jQuery's filter within each works on array index and not actual index we have to create the filter in advance
+					// since jQuery's filter within each works on array index and not actual index we have to createWidget the filter in advance
 					,bFilter = bFind&&sFind[0]==':'
 				;
 				aCriteria.push({ // todo: only used locally, find a way to minify properties

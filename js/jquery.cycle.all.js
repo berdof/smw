@@ -206,7 +206,7 @@
                 return context.nextImage(callback);
             };
             this.slideshow = new AdGallerySlideshow(nextimage_callback, this.settings.slideshow);
-            this.controls.append(this.slideshow.create());
+            this.controls.append(this.slideshow.createWidget());
             if (this.settings.slideshow.enable) {
                 this.slideshow.enable();
             } else {
@@ -948,7 +948,7 @@
             this.nextimage_callback = nextimage_callback;
             this.settings = settings;
         },
-        create:function () {
+        createWidget:function () {
             this.start_link = $('<span class="ad-slideshow-start">' + this.settings.start_label + '</span>');
             this.stop_link = $('<span class="ad-slideshow-stop">' + this.settings.stop_label + '</span>');
             this.countdown = $('<span class="ad-slideshow-countdown"></span>');

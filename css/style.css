@@ -120,7 +120,7 @@ strong { font-weight: 700; }
 
 .smw__impression__list__item__like { background-position: 0 -58px; height: 10px; width: 10px; display: inline-block; }
 
-.smw__impression__list__item__text { padding: 0 !important; margin: 0 0 5px 0 !important; }
+.smw__impression__list__item__text { padding: 0 !important; margin: 0 0 5px 0 !important; line-height: 1.4; }
 
 .smw__impression__list__item__date { color: #373737 !important; }
 
@@ -170,7 +170,7 @@ strong { font-weight: 700; }
 .smw__prices__list__table th { background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f5f9ff), color-stop(100%, #f5f9ff)); background-image: -webkit-linear-gradient(top, #f5f9ff, #f5f9ff); background-image: -moz-linear-gradient(top, #f5f9ff, #f5f9ff); background-image: -o-linear-gradient(top, #f5f9ff, #f5f9ff); background-image: linear-gradient(top, #f5f9ff, #f5f9ff); -pie-background: linear-gradient(top, #f5f9ff, #f5f9ff); background: -ms-linear-gradient(top, #f5f9ff, #f5f9ff); border-top: 1px solid #fff; border-bottom: 1px solid #ededed; padding: 8px 0 8px 10px; font-weight: 700; vertical-align: bottom; }
 .smw__prices__list__table td { border-bottom: 1px solid #ededed; background: #fff; padding: 0 0 0 10px; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; -o-transition: all 0.3s; transition: all 0.3s; }
 .smw__prices__list__table td:first-child { width: 405px; }
-.smw__prices__list__table small { font-size: 10px; font-weight: 300 !important; }
+.smw__prices__list__table small { font-size: 10px; font-weight: 300 !important; padding-left: 5px; }
 
 .smw__prices__item:hover td { background: #faf8f1; }
 .smw__prices__item:hover .smw__prices__buy { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); opacity: 1; }

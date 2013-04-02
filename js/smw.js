@@ -75,7 +75,7 @@
                 parent = self.$elem.parent();
             if (parent.hasClass('preload')) {
                 $.each(self.defaults.scriptsListPath, function (i, link) {
-                    $('body').prepend($('<script src="'+link+'"></script>'));
+                    $('body').prepend($('<script src="' + link + '"></script>'));
                 })
                 $('head').prepend($('<link/>', {
                     'href': self.defaults.cssLinkPath,
@@ -84,7 +84,7 @@
             }
             parent.removeClass('preload')
         },
-        create: function () {
+        createWidget: function () {
             var self = this,
                 $self = this.$elem;
             self.config = $.extend({}, this.defaults, this.options,
@@ -98,8 +98,8 @@
             self.getGadgetId(this.config.gadgetName).done(function (data) {
                 self.gadgetId = data.model_id;
                 self.init(self, $self);
-                console.log(self.gadgetId);
             });
+
 
         },
         //fires after we get the gadget id to work with data
@@ -111,7 +111,6 @@
             self.$footer = $self.find('.' + self.classNames.footer);
             self.$tabsNavItem = $self.find('.' + self.classNames.tabsNavItem);
 
-            //todo: create unique IDs for each template by adding index to it
             self.fetchHeaderData().done(function (data) {
 
                 self.fillHeader(data, self.templateNames.header);
@@ -123,11 +122,7 @@
                 self.fillImpressions(data, self.templateNames.impressions);
             });
             self.fetchInfoData().done(function (data) {
-
                 self.fillInfo(data, self.templateNames.info);
-                //when last tab item is rendered and filled with data then fill tabs nav info(counters)
-                //todo: fix async problem
-                self.fillTabsNav(self.fetchTabsNavData(), self.templateNames.tabsNav);
             });
 
 
@@ -136,7 +131,6 @@
             });
 
             this.attachEvents();
-
 
             //todo: fade this
             $('.' + self.classNames.stuff + ':first .' + self.classNames.footer).trigger('click');
@@ -159,7 +153,6 @@
                 regionsArr.push(this.region);
             });
             //todo: add keys functionality
-            //add
             this.$elem.find('.search input[type=text]').typeaheadSmwMod({
                 source: regionsArr,
                 items: 4
@@ -168,7 +161,6 @@
         },
 
         fetchRegionsData: function () {
-            //todo: replace with real regions
             var self = this;
             return $.ajax({
                 url: self.config.urlRegions + "?jsonp=?",
@@ -178,10 +170,12 @@
                 }
             });
         },
-        fetchTabsNavData: function () {
-            return {impressionsCount: this.impressionsCount, priceCount: this.priceCount};
+        stringToDateTimeString: function (timeStr) {
+            var date = timeStr.split(" ");
+            date[0] = date[0].split("-");
+            date[1] = date[1].split(":");
+            return   new Date(date[0][0], date[0][1], date[0][2], date[1][0], date[1][1], date[1][2]).getTime();
         },
-
         fetchImpressionsData: function () {
 
             var self = this;
@@ -190,21 +184,15 @@
                 dataType: 'jsonp',
                 success: function (data) {
                     var rate = 0;
-
                     $.each(data.impressions, function () {
                         rate += ~~this.impression.rating;
                         this.classN = this.is_have === 1 ?
                             self.classNames.hasIco :
                             self.classNames.likeIco;
-                        //todo: fix firefox Date NaN bug
-                        this.impression.date = new Date(this.impression.date).getTime();
-
-
+                        this.impression.date = self.stringToDateTimeString(this.impression.date.toString());
                     });
-                    //todo: floor avg to tens like 5.2
                     data.avgRate = (rate / data.impressions.length).toFixed(1);
-
-                    self.impressionsCount = data.impressions.length;
+                    self.$elem.find('.smw__tab__nav__reviews .smw__tab__nav__counter').html(data.impressions.length )
 
                 }
             });
@@ -214,7 +202,10 @@
             var self = this;
             return $.ajax({
                 url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
-                dataType: 'jsonp'
+                dataType: 'jsonp',
+                success: function (d) {
+                    d.prices.avg = self.priceReformat(d.prices.avg);
+                }
             });
         },
         fetchPricesData: function () {
@@ -223,23 +214,20 @@
                 url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
-
                     $.map(d.offers, function (offer) {
-                        offer.price = offer.price.toString().replace('руб', '');
+                        offer.price = self.priceReformat(offer.price)
+                            .replace('руб', ' &nbsp;');
                     })
-                    self.priceCount = d.offers.length;
+                    self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length )
                 }
             });
-            //return fakeData.prices.offers;
         },
         fetchInfoData: function () {
             var self = this;
             return $.ajax({
                 url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
-                dataType: 'jsonp',
-                success: function () {
-                    console.log(this);
-                }
+                dataType: 'jsonp'
+
             });
         },
         fillTabsNav: function (data, tabsNavTemplateId) {
@@ -280,7 +268,6 @@
         },
         renderHeader: function () {
             this.$elem.find('.smw__stuff__in').prepend(smwHeader);
-            //todo: render template head
         },
         renderBody: function () {
             //todo: render template body
@@ -318,8 +305,6 @@
             //todo: write fetch towns
             var self = e.data.self;
             self.$elem.find('.search').fadeToggle();
-
-
             e.preventDefault();
         },
         /**helpers**/
@@ -334,19 +319,14 @@
                 if (i === 1) iLnH = iY;
             });
             containerItem.tsort('', {data: sortType, order: 'desc'});
-            /*   .each(function (i, el) {
+            /*.each(function (i, el) {
              var $El = $(el);
              var iFr = $.data(el, 'h');
              var iTo = i * iLnH;
              $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
-             });
-
-             plugin.$elem.find('.smw__impression__list__item')
-             .tsort('', {data: sortType, order: 'desc'});*/
+             });*/
         },
-
         sortImpressionsHandler: function (e) {
-            //todo: write sorter
             var self = $(this) ,
                 plugin = e.data.self;
             self.closest('ul').find('a').removeClass('active')
@@ -360,20 +340,22 @@
                 self.data('sort-type'));
             e.preventDefault();
         },
+        priceReformat: function (str) {
+            return str.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        },
         /** !helpers**/
 
         /**event handlers**/
         toggleRedirectPopup: function (speed, toLink, effect) {
-            //todo: change to $elem link
-            $('.smw .smwRedirect')[effect || 'fadeToggle'](speed || 200)
+            this.$elem.find('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
+
         },
         redirectLinkHandler: function (e) {
-            e.preventDefault();
             var self = e.data.self,
                 href = $(this).attr('href');
             self.toggleRedirectPopup(200, href, "fadeToggle");
-
+            e.preventDefault();
         },
         footerClickHandler: function (e) {
 
@@ -386,6 +368,7 @@
             setTimeout(function () {
                 self.initScroll();
             }, 1000)
+            self.toggleRedirectPopup(300, '#', 'fadeOut')
 
         },
         tabsItemClickHandler: function (e) {
@@ -427,7 +410,7 @@
     $.fn.SocialMart = function (options) {
 
         return this.each(function () {
-            new SocialMart(this, options).create();
+            new SocialMart(this, options).createWidget();
         });
     };
 

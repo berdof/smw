@@ -18,11 +18,9 @@ var smwSkeleton =
             '</script>' +
             '</div>',
     smwTabNav = '<ul class="smw__tab__nav">' +
-        '<script data-id="tabsNavTemplate" type="text/x-handlebars-template">' +
-        '<li><a class="smw__tab__nav__prices  active" href="#">Цены <span class="smw__tab__nav__counter">{{priceCount}}</span> </a></li>' +
-        '<li><a class="smw__tab__nav__reviews" href="#">Впечатления <span class="smw__tab__nav__counter">{{impressionsCount}}</span> </a></li>' +
+        '<li><a class="smw__tab__nav__prices  active" href="#">Цены <span class="smw__tab__nav__counter"></span> </a></li>' +
+        '<li><a class="smw__tab__nav__reviews" href="#">Впечатления <span class="smw__tab__nav__counter"></span> </a></li>' +
         '<li><a class="smw__tab__nav__info " href="#">Характеристики</a></li>' +
-        '</script>' +
         '</ul>',
     smwPriceHead = '<div class="smw__prices__list__head">' +
         '<div class="smw__prices__list__l fl_l">' +
@@ -79,12 +77,13 @@ var smwSkeleton =
         '<div class="smw__info-wrap">' +
         '<script data-id="infoTemplate" type="text/x-handlebars-template">' +
             '<div class="clearfix">' +
+                        '<div class="ya-info fl_r">Данные -<a href="#"> Яндекс.Маркет</a></div></div>'+
+            '<div class="clearfix">' +
             '{{#each this}}<div class="smw__info">' +
             '<span class="smw__info__name">{{key}}</span>' +
             '<p class="smw__info__value">{{value}}</p></div>' +
             '{{/each}}</div>' +
-            '<div class="clearfix">' +
-            '<div class="ya-info fl_r">Данные -<a href="#"> Яндекс.Маркет</a></div></div>' +
+
             '</script>' +
             '<div class="ya-info">Данные -<a href="#"> Яндекс.Маркет</a></div></div>',
     smwRedirect = '<div class="smwRedirect">' +
