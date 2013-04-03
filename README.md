@@ -10,7 +10,7 @@
 
 <p>
 3. Append div for a stuff
-<br><div data-plugin-options='{"gadgetName":"Apple iPhone 5 16Gb"}' class="smw__stuff"></div>
+<br><pre> <div data-plugin-options='{"gadgetName":"Apple iPhone 5 16Gb"}' class="smw__stuff"></div></pre>
 </p>
 
 <p>
