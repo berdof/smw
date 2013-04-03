@@ -69,12 +69,15 @@
             info: 'infoTemplate',
             tabsNav: 'tabsNavTemplate'
         },
-
+        //append links only once
+        //to prevent appending us '.not-preload' class on parent div
         appendLibraries: function () {
             var self = this,
                 parent = self.$elem.parent();
             if (parent.hasClass('preload')) {
+
                 $.each(self.defaults.scriptsListPath, function (i, link) {
+                    console.log(link);
                     $('body').prepend($('<script src="' + link + '"></script>'));
                 })
                 $('head').prepend($('<link/>', {
@@ -138,6 +141,10 @@
             if (self.config.disableRegionSelection)
                 self.$elem.find('.where-to-buy').hide();
 
+
+            self.initScroll();
+
+
             return this;
         },
         getGadgetId: function (name) {
@@ -192,7 +199,7 @@
                         this.impression.date = self.stringToDateTimeString(this.impression.date.toString());
                     });
                     data.avgRate = (rate / data.impressions.length).toFixed(1);
-                    self.$elem.find('.smw__tab__nav__reviews .smw__tab__nav__counter').html(data.impressions.length )
+                    self.$elem.find('.smw__tab__nav__reviews .smw__tab__nav__counter').html(data.impressions.length)
 
                 }
             });
@@ -218,7 +225,7 @@
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
                     })
-                    self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length )
+                    self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length)
                 }
             });
         },
@@ -310,14 +317,14 @@
         /**helpers**/
         sorter: function (plugin, container, containerItem, sortType) {
 
-            containerItem.css({'position': 'relative', 'top': 0});
+            /*containerItem.css({'position': 'relative', 'top': 0});
             container.css({position: 'relative', height: container.height(), display: 'block'});
             var iLnH;
             containerItem.each(function (i, el) {
                 var iY = $(el).position().top;
                 $.data(el, 'h', iY);
                 if (i === 1) iLnH = iY;
-            });
+            });*/
             containerItem.tsort('', {data: sortType, order: 'desc'});
             /*.each(function (i, el) {
              var $El = $(el);
@@ -347,9 +354,10 @@
 
         /**event handlers**/
         toggleRedirectPopup: function (speed, toLink, effect) {
-            this.$elem.find('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
-                .find('.redirect__body a').attr('href', toLink);
 
+            $('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
+                .find('.redirect__body a').attr('href', toLink);
+                return false;
         },
         redirectLinkHandler: function (e) {
             var self = e.data.self,
@@ -388,11 +396,23 @@
             e.preventDefault();
         },
         initScroll: function () {
-            this.$elem.find(
-                '.smw__impression__list-sort,' +
-                    ' .smw__info-wrap-scroll, ' +
-                    '.smw__prices__list-scroll').jScrollPane();
+            /*this.$elem.find(
+             '.smw__impression__list-sort,' +
+             ' .smw__info-wrap-scroll, ' +
+             '.smw__prices__list-scroll').jScrollPane();*/
 
+            var elem = this.$elem.find(
+                '.smw__impression__list-sort:visible,' +
+                    ' .smw__info-wrap-scroll:visible, ' +
+                    '.smw__prices__list-scroll:visible');
+            $.each(elem, function () {
+                var targ = $(this);
+
+                if(!targ.hasClass('scroll-loaded')){
+                   targ.addClass('scroll-loaded').jScrollPane({autoReinitialise:true});
+                    console.log(targ);
+                }
+            })
 
         },
         /**!event handlers**/
@@ -415,7 +435,9 @@
     };
 
     //optional: window.Plugin = Plugin;
-
+    $('.smw__stuff').each(function(){
+       $(this).SocialMart();
+    })
 })(jQuery, window, document);
 
 

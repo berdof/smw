@@ -3,7 +3,7 @@ smw
 
 social mart widget
 
-Reguires:  <br/> 
+Requires:  <br/>
 Jquery 1.7.1.js > <br/>
 handlebars.js<br/>
 tinySort.jquery.js<br/>
