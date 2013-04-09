@@ -1,11 +1,19 @@
+
 @import "settings";
+#smw{
 strong{
   font-weight: 700;
 }
-$images-layout: smart;
+  p{
+    text-indent: 0 !important;
+    text-align: left;
+  }
+}
+$images-layout: vertical;
+$images-spacing: 12px;
 @import "images/*.png";
 
-.smw {
+#smw {
   font-family:  'Trebuchet MS';
   //font-family:  Arial;
   width: 593px;
@@ -31,3 +39,7 @@ $images-layout: smart;
   left: 0;
   top: 0;
 }
+
+
+
+@import "lt-ie9";

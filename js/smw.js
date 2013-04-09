@@ -7,19 +7,14 @@
  *
  */
 
-
-;
-(function ($, window, document, undefined) {
+;(function ($, window, document, undefined) {
 
     // plugin constructor
     var SocialMart = function (elem, options) {
         this.elem = elem;
         this.$elem = $(elem);
         this.options = options;
-        // This next line takes advantage of HTML5 data attributes
-        // to support customization of the plugin on a per-element
-        // basis. For example,
-        // <div class=item' data-plugin-options='{"message":"Goodbye World!"}'></div>
+        this.widgetId =71717171717171;
         this.metadata = this.$elem.data('plugin-options');
     };
 
@@ -42,7 +37,9 @@
                 'js/libs/handlebars.js',
                 'js/smwVievs.js'
             ],
-            cssLinkPath: 'css/style.css'
+            cssLinkPath: 'css/style.css',
+            liksRoot :'http://crucer.ru/mobile/'
+           //liksRoot :''
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -76,27 +73,35 @@
                 parent = self.$elem.parent();
             if (parent.hasClass('preload')) {
 
-                $.each(self.defaults.scriptsListPath, function (i, link) {
-                    console.log(link);
-                    $('body').prepend($('<script src="' + link + '"></script>'));
-                })
+                $.each(self.config.scriptsListPath, function (i, link) {
+                    var s =$('<script></script>',{
+                        "src":self.config.liksRoot + link,
+                        "charset":"UTF-8"
+                    })
+                    $('body').prepend(s);
+                    console.log(s);
+                });
                 $('head').prepend($('<link/>', {
-                    'href': self.defaults.cssLinkPath,
+                    'href': self.config.liksRoot +self.config.cssLinkPath,
                     'rel': 'stylesheet'
                 }));
             }
             parent.removeClass('preload')
         },
         createWidget: function () {
+
             var self = this,
                 $self = this.$elem;
             self.config = $.extend({}, this.defaults, this.options,
                 this.metadata);
+
             self.appendLibraries();
 
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
             self.userRegion = this.config.userRegion;
+            self.WidgetId = this.config.widgetId;
+
 
             self.getGadgetId(this.config.gadgetName).done(function (data) {
                 self.gadgetId = data.model_id;
@@ -107,6 +112,7 @@
         },
         //fires after we get the gadget id to work with data
         init: function (self, $self) {
+
             this.ieFix();
             //generate template
             this.render();
@@ -149,7 +155,7 @@
         },
         getGadgetId: function (name) {
             return $.ajax({
-                url: this.config.urlModels + '?name=' + name + "&jsonp=?",
+                url: this.config.urlModels + '?name=' + name +'&wId='+this.widgetId+ "&jsonp=?",
                 dataType: 'jsonp'
             });
         },
@@ -187,7 +193,7 @@
 
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + "&jsonp=?",
+                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + '&wId='+this.widgetId+ "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
                     var rate = 0;
@@ -208,7 +214,7 @@
         fetchHeaderData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
+                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId='+this.widgetId+ '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     d.prices.avg = self.priceReformat(d.prices.avg);
@@ -218,21 +224,21 @@
         fetchPricesData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
+                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     $.map(d.offers, function (offer) {
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
-                    })
-                    self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length)
+                    });
+                    self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
                 }
             });
         },
         fetchInfoData: function () {
             var self = this;
             return $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId + '&jsonp=?',
+                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
                 dataType: 'jsonp'
 
             });
@@ -268,9 +274,9 @@
         //rendering html contents
         render: function () {
             var self = this;
-            self.$elem.html(smwSkeleton)
-            self.renderHeader()
-            self.renderBody()
+            self.$elem.html(smwSkeleton);
+            self.renderHeader();
+            self.renderBody();
             self.renderFooter();
         },
         renderHeader: function () {
@@ -375,8 +381,8 @@
             stuffInCur.slideDown().parent().addClass('opened');
             setTimeout(function () {
                 self.initScroll();
-            }, 1000)
-            self.toggleRedirectPopup(300, '#', 'fadeOut')
+            }, 1000);
+            self.toggleRedirectPopup(300, '#', 'fadeOut');
 
         },
         tabsItemClickHandler: function (e) {
@@ -420,8 +426,11 @@
             //todo: add ie class and delete pseudo comments
             var browser = $.browser;
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
-                this.$elem.addClass('lt-ie9');
+                this.$elem.parent().addClass('lt-ie9');
             }
+
+
+
         }
     };
 
@@ -434,10 +443,6 @@
         });
     };
 
-    //optional: window.Plugin = Plugin;
-    $('.smw__stuff').each(function(){
-       $(this).SocialMart();
-    })
 })(jQuery, window, document);
 
 
