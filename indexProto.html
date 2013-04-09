@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="debug"></div>
+
+<div style="margin: 200px auto" class="smw preload">
+<div data-plugin-options='{"gadgetName":"Apple iPhone 5 16Gb"}' class="smw__stuff">
+<div class="smw__stuff__in">
+<!--smwHeader-->
+<div class="smw__header">
+    <script data-id="headerTemplate" type="text/x-handlebars-template">
+        <div class="smw__stuff-img-wrap">
+            <div class="smw__stuff-img"><img src="{{photo}}" alt=""/></div>
+        </div>
+        <div class="fl_l">
+            <h2 class="smw__stuff-name">{{name}}</h2>
+
+            <div>Средняя цена <span class="smw__stuff-price">{{prices.avg}} руб</span></div>
+        </div>
+        <a class="smw__logo fl_r" href="#"></a>
+    </script>
+</div>
+<!--!smwHeader-->
+<div class="smw__body">
+    <!--smwTab-->
+    <div class="smw__tab">
+        <!--smwTabNav-->
+        <ul class="smw__tab__nav">
+            <script data-id="tabsNavTemplate" type="text/x-handlebars-template">
+                <li><a class="smw__tab__nav__prices  active" href="#">Цены <span class="smw__tab__nav__counter">{{priceCount}}</span> </a></li>
+                <li><a class="smw__tab__nav__reviews" href="#">Впечатления <span class="smw__tab__nav__counter">{{impressionsCount}}</span> </a></li>
+                <li><a class="smw__tab__nav__info " href="#">Характеристики</a></li>
+            </script>
+        </ul>
+        <!--!smwTabNav-->
+        <!--smwTabBody-->
+        <div class="smw__tab__contents">
+            <div class="smw__tab__contents__item">
+                <div class="smw__prices">
+                    <div class="smw__prices__list">
+                        <!--smwPriceHead-->
+                        <div class="smw__prices__list__head">
+                            <div class="smw__prices__list__l fl_l">
+                                <div class="smw__prices__list__all">
+                                    Все предложения:
+
+                                    <div class="where-to-buy ">
+                                        <a class="where-to-buy__trigger" href="#">Москва</a>
+
+                                        <form action="#" class="search">
+                                            <input autocomplete="off" data-provide="typeaheadSmwMod"
+                                                   data-items="4"
+                                                   type="text"
+                                                   placeholder="Найти город">
+                                            <input type="submit" value="">
+                                            <!--   <ul class="where-to-buy__towns">
+                                                   <li><a href="#">Москва</a></li>
+                                                   <li><a href="#">Санкт-Петербург</a></li>
+                                                   <li><a href="#">Красноярск</a></li>
+                                                   <li><a href="#">Новосибирск</a></li>
+                                                   <li><a href="#">Екатеринбург</a></li>
+                                               </ul>-->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ya-info fl_r">
+                                Данные -
+                                <a href="#"> Яндекс.Маркет</a>
+                            </div>
+                        </div>
+                        <!--!smwPriceHead-->
+                        <div class="smw__prices__list-scroll">
+                            <table class="smw__prices__list__table">
+                                <script data-id="pricesTemplate" type="text/x-handlebars-template">
+                                    <tbody>
+                                    {{#each this}}
+                                    <tr class="smw__prices__item">
+                                        <td>{{name}}</td>
+                                        <td class="smw__prices__item__cost">
+                                            {{price}}
+                                            <small>руб</small>
+                                        </td>
+                                        <td><a class="smw__prices__buy" target="_blank" href="{{clickUrl}}">Купить</a></td>
+                                    </tr>
+                                    {{/each }}
+                                    </tbody>
+                                </script>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="smw__tab__contents__item">
+                <!--smwInpressions-->
+                <div class="smw__impression">
+                    <script data-id="impressionsTemplate" type="text/x-handlebars-template">
+                        <!--smwInpressionsHead-->
+                        <div class="smw__impression__head">
+                            {{#if impressions.length }}
+                            <i class="smw__impression__head__rate fl_l">{{avgRate}}</i>
+                            {{else}}
+                            <i class="smw__impression__head__rate_empty fl_l">0</i>
+                            {{/if}}
+                                        <span class="smw__impression__head__mark fl_l">
+                                            оценок
+                                            {{#if impressions.length }}
+                                            <strong class="db">{{impressions.length}}</strong>
+                                            {{else}}
+                                            <strong class="db">НЕТ</strong>
+                                            {{/if}}
+                                        </span>
+                            <a data-redirect='true' class="fl_r btn_dgreen" href="http://dev2.socialmart.ru">Поделиться впечатлением</a>
+                            {{#if impressions.length }}
+                            <ul class="smw__impression__filter center">
+                                <li>Сортировать по:</li>
+                                <li><a data-sort-type='date' class="active" href="#">дата</a></li>
+                                <li><a data-sort-type='mark' href="#">оценка</a></li>
+                                <li><a data-sort-type='usefull' href="#">полезность</a></li>
+                            </ul>
+                            {{else}}
+                            <p class="smw__impression__head__slogan fl_l">Пока никто не поделился своим впечатлением
+                                об этом товаре. Почему бы не стать первым?</p>
+                            {{/if }}
+                        </div>
+                        <!--!smwInpressionsHead-->
+                        <!--smwInpressionsBody-->
+                        <div class="smw__impression__body">
+                            {{#if impressions.length }}
+                            <div class="smw__impression__list-sort">
+                                <div class="smw__impression__list">
+                                    {{#each impressions}}
+                                    <div data-date={{impression.date}} data-mark={{impression.rating}} data-usefull={{impression.count_like}} class="smw__impression__list__item">
+                                        <img class="fl_l smw__impression__list__item__ava" src="{{user.pic}}" alt=""/>
+
+                                        <div class="center">
+                                            <span class="smw__impression__list__item__rate">{{impression.rating}}</span>
+
+                                            <a class="smw__impression__list__item__name" href="{{user.profileUrl}}">
+                                                {{user.name}} -
+                                                <!--  <i class={{classN}}></i>-->
+                                                </a>
+
+                                            <p class="smw__impression__list__item__text">{{impression.text}}</p>
+                                            <span class="smw__impression__list__item__date">{{impression.date_h}}</span>
+                                            <ul class="smw__impression__list__item__nav">
+                                                <li><a class="smw__impression__list__item__tu" href="#">{{impression.count_like}}</a></li>
+                                                <li><a class="smw__impression__list__item__td" href="#">{{impression.count_dislike}}</a></li>
+                                                <li><a class="smw__impression__list__item__comments" href="#">{{impression.count_comments}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                            {{/if }}
+                        </div>
+                        <!--!smwInpressionsBody-->
+                    </script>
+                </div>
+                <!--!smwInpressions-->
+            </div>
+            <div class="smw__tab__contents__item">
+                <div class="smw__info-wrap-scroll">
+                    <!--smwInfo-->
+                    <div class="smw__info-wrap">
+                        <script data-id="infoTemplate" type="text/x-handlebars-template">
+
+                            <div class="clearfix">
+                                {{#each this}}
+                                <div class="smw__info">
+                                    <span class="smw__info__name">{{key}}</span>
+
+                                    <p class="smw__info__value">{{value}}</p>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                            <div class="clearfix">
+
+                                <div class="ya-info fl_r">
+                                    Данные -
+                                    <a href="#"> Яндекс.Маркет</a>
+                                </div>
+                            </div>
+                        </script>
+
+                        <div class="ya-info">
+                            Данные -
+                            <a href="#"> Яндекс.Маркет</a>
+                        </div>
+                    </div>
+                    <!--!smwInfo-->
+                </div>
+            </div>
+        </div>
+        <!--!smwTabBody-->
+    </div>
+    <!--!smwTab-->
+    <!--smwRedirect-->
+    <div class="smwRedirect">
+        <div class="redirect__head">
+            <a class="redirect__back fl_r " href="#">← Назад</a>
+        </div>
+        <div class="redirect__body">
+            <p>Вы будете перенаправлены на сайт сервиса</p>
+
+            <a class="logo" href="#"></a>
+
+
+            <p>Ссылка откроется в новом окне</p>
+            <a class="redirect__to" target="_blank" href="#">Продолжить →</a>
+        </div>
+    </div>
+    <!--!smwRedirect-->
+</div>
+</div>
+</div>
+</div>
+
+<script src="js/libs/jquery-1.7.1.min.js"></script>
+<script src="js/libs/jquery.jscrollpane.min.js"></script>
+<script src="js/libs/jquery.tinySort.jquery.js"></script>
+
+<script src="js/libs/typeaheadSmwMod.jquery.js"></script>
+
+<script src="js/libs/jquery.mousewheel.js"></script>
+<script src="js/libs/handlebars.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+<script src="js/smw.js"></script>
+<script src="js/smwVievs.js"></script>
+<script type="text/javascript">
+    $('.smw__stuff').SocialMart();
+</script>
+</body>
+</html>

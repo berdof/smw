@@ -32,7 +32,7 @@
 		,oSettings
 		,iAsc
 	;
-	// create basic latin string chars 32-255
+	// createWidget basic latin string chars 32-255
 	for (var i=32,s=frCrCd(i),len=255;i<len;i++,s=frCrCd(i).toLowerCase()) { // using lowerCase instead of upperCase so _ will sort before
 		if (aAllChars.indexOf(s)===-1) aAllChars.push(s);
 	}
