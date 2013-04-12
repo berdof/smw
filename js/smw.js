@@ -39,8 +39,8 @@
                 'js/smwVievs.js'
             ],
             cssLinkPath: 'css/style.css',
-            //liksRoot: 'http://crucer.ru/widget/'
-            liksRoot: ''
+            liksRoot: 'http://crucer.ru/widget/'
+            //liksRoot: ''
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -447,6 +447,7 @@
         elem: '',
         widgetID: '',
         searchMode :'splitbylat',
+        linksRoot :'http://crucer.ru/widget/',
         init: function (elem, options) {
             var self = this;
             self.elem = elem;
@@ -465,6 +466,8 @@
                     $(self.elem).append(frag);
                     var smw = new SocialMart(frag, options);
                     smw.widgetId = self.widgetID;
+                    smw.defaults.liksRoot= self.linksRoot;
+                    console.log(smw.defaults.liksRoot);
                     smw.createWidget();
                 })
             });
@@ -496,6 +499,7 @@
         return this.each(function (el, i) {
             SocialMartPreBuild.widgetID = $(this).attr('data-widget-id');
             SocialMartPreBuild.searchMode = options.searchMode;
+            SocialMartPreBuild.linksRoot = options.linksRoot;
             SocialMartPreBuild.init(this, options);
 
             //new SocialMart(this, options).createWidget();
