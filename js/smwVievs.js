@@ -1,3 +1,4 @@
+
 var smwSkeleton =
         ' <div class="smw__stuff__in">' +
             '<div class="smw__body">' +
@@ -95,4 +96,3 @@ var smwSkeleton =
         '<p>Ссылка откроется в новом окне</p>' +
         '<a class="redirect__to" target="_blank" href="#">Продолжить →</a></div>' +
         '</div>';
-

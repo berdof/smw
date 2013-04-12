@@ -7,14 +7,15 @@
  *
  */
 
-;(function ($, window, document, undefined) {
+;
+(function ($, window, document, undefined) {
 
     // plugin constructor
     var SocialMart = function (elem, options) {
         this.elem = elem;
         this.$elem = $(elem);
         this.options = options;
-        this.widgetId =71717171717171;
+        this.widgetId = 71717171717171;
         this.metadata = this.$elem.data('plugin-options');
     };
 
@@ -38,8 +39,8 @@
                 'js/smwVievs.js'
             ],
             cssLinkPath: 'css/style.css',
-            liksRoot :'http://crucer.ru/mobile/'
-           //liksRoot :''
+            //liksRoot: 'http://crucer.ru/widget/'
+            liksRoot: ''
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -71,22 +72,24 @@
         appendLibraries: function () {
             var self = this,
                 parent = self.$elem.parent();
+
             if (parent.hasClass('preload')) {
 
                 $.each(self.config.scriptsListPath, function (i, link) {
-                    var s =$('<script></script>',{
-                        "src":self.config.liksRoot + link,
-                        "charset":"UTF-8"
+                    var s = $('<script></script>', {
+                        "src": self.config.liksRoot + link,
+                        "charset": "UTF-8"
                     })
+
                     $('body').prepend(s);
-                    console.log(s);
+
                 });
                 $('head').prepend($('<link/>', {
-                    'href': self.config.liksRoot +self.config.cssLinkPath,
+                    'href': self.config.liksRoot + self.config.cssLinkPath,
                     'rel': 'stylesheet'
                 }));
             }
-            parent.removeClass('preload')
+            parent.removeClass('preload');
         },
         createWidget: function () {
 
@@ -100,13 +103,13 @@
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
             self.userRegion = this.config.userRegion;
-            self.WidgetId = this.config.widgetId;
+            self.WidgetId = 11111;///$self.attr('data-id');
 
 
-            self.getGadgetId(this.config.gadgetName).done(function (data) {
-                self.gadgetId = data.model_id;
-                self.init(self, $self);
-            });
+            //self.getGadgetId(this.config.gadgetName).done(function (data) {
+            self.gadgetId = $self.attr('data-id');
+            self.init(self, $self);
+            //});
 
 
         },
@@ -146,16 +149,18 @@
 
             if (self.config.disableRegionSelection)
                 self.$elem.find('.where-to-buy').hide();
-
-
             self.initScroll();
 
 
             return this;
         },
         getGadgetId: function (name) {
+
             return $.ajax({
-                url: this.config.urlModels + '?name=' + name +'&wId='+this.widgetId+ "&jsonp=?",
+                url: this.config.urlModels + '?name=' + name + '&wId=' + this.widgetId + "&jsonp=?",
+                success: function () {
+
+                },
                 dataType: 'jsonp'
             });
         },
@@ -193,7 +198,7 @@
 
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + '&wId='+this.widgetId+ "&jsonp=?",
+                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + '&wId=' + this.widgetId + "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
                     var rate = 0;
@@ -214,17 +219,18 @@
         fetchHeaderData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId='+this.widgetId+ '&jsonp=?',
+                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     d.prices.avg = self.priceReformat(d.prices.avg);
+                    self.$elem.find('.smw__stuff__num').after(d.name)
                 }
             });
         },
         fetchPricesData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
+                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     $.map(d.offers, function (offer) {
@@ -238,7 +244,7 @@
         fetchInfoData: function () {
             var self = this;
             return $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
+                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp'
 
             });
@@ -324,13 +330,13 @@
         sorter: function (plugin, container, containerItem, sortType) {
 
             /*containerItem.css({'position': 'relative', 'top': 0});
-            container.css({position: 'relative', height: container.height(), display: 'block'});
-            var iLnH;
-            containerItem.each(function (i, el) {
-                var iY = $(el).position().top;
-                $.data(el, 'h', iY);
-                if (i === 1) iLnH = iY;
-            });*/
+             container.css({position: 'relative', height: container.height(), display: 'block'});
+             var iLnH;
+             containerItem.each(function (i, el) {
+             var iY = $(el).position().top;
+             $.data(el, 'h', iY);
+             if (i === 1) iLnH = iY;
+             });*/
             containerItem.tsort('', {data: sortType, order: 'desc'});
             /*.each(function (i, el) {
              var $El = $(el);
@@ -363,7 +369,7 @@
 
             $('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
-                return false;
+            return false;
         },
         redirectLinkHandler: function (e) {
             var self = e.data.self,
@@ -400,6 +406,7 @@
 
             self.toggleRedirectPopup(200, "", "fadeOut");
             e.preventDefault();
+            return false;
         },
         initScroll: function () {
             /*this.$elem.find(
@@ -414,9 +421,9 @@
             $.each(elem, function () {
                 var targ = $(this);
 
-                if(!targ.hasClass('scroll-loaded')){
-                   targ.addClass('scroll-loaded').jScrollPane({autoReinitialise:true});
-                    console.log(targ);
+                if (!targ.hasClass('scroll-loaded')) {
+                    targ.addClass('scroll-loaded').jScrollPane({autoReinitialise: true});
+
                 }
             })
 
@@ -428,18 +435,70 @@
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.parent().addClass('lt-ie9');
             }
-
-
-
         }
     };
 
     SocialMart.defaults = SocialMart.prototype.defaults;
 
+    var SocialMartPreBuild = {
+        title: '',
+        id: [],
+        frag: [],
+        elem: '',
+        widgetID: '',
+        searchMode :'splitbylat',
+        init: function (elem, options) {
+            var self = this;
+            self.elem = elem;
+            self.title = self.getTitle();
+            self.getId().done(function (d) {
+                if ((typeof d.model_id) === 'string') {
+                    self.id.push(d.model_id)
+                }
+                else {
+                    self.id = d.model_id;
+                }
+
+                $.each(self.id, function (i, el) {
+                    var frag = self.createFrag(el);
+                    self.frag.push(frag);
+                    $(self.elem).append(frag);
+                    var smw = new SocialMart(frag, options);
+                    smw.widgetId = self.widgetID;
+                    smw.createWidget();
+                })
+            });
+
+        },
+        getTitle: function () {
+            return this.title = $(document).find('title').text();
+        },
+        getId: function () {
+            var self = this;
+            return  $.ajax({
+                url: 'http://dev2.socialmart.ru/widget/get/model/?name=' + self.title + '&mode='+self.searchMode+"&jsonp=?",
+                dataType: 'jsonp'
+            });
+        },
+        createFrag: function (id) {
+            return frag = $("<div></div>", {
+                'data-id': id,
+                'class': 'smw__stuff'
+            });
+            //<div data-plugin-options='{"gadgetName": "Apple iPhone 5 16Gb"}' class="smw__stuff"></div>;
+        }
+
+    }
+
     $.fn.SocialMart = function (options) {
 
-        return this.each(function () {
-            new SocialMart(this, options).createWidget();
+
+        return this.each(function (el, i) {
+            SocialMartPreBuild.widgetID = $(this).attr('data-widget-id');
+            SocialMartPreBuild.searchMode = options.searchMode;
+            SocialMartPreBuild.init(this, options);
+
+            //new SocialMart(this, options).createWidget();
         });
     };
 
@@ -448,6 +507,7 @@
 
 /*
  Test queries
+ http://dev2.socialmart.ru/widget/get/model/?name=searchStr&mode=splitbylat
  http://dev2.socialmart.ru/widget/get/model?name=Samsung
  http://dev2.socialmart.ru/widget/get/regions
  http://dev2.socialmart.ru/widget/get/model/info?region=1&model=111
