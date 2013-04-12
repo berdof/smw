@@ -1,0 +1,492 @@
+fieldset {
+   border:#7b9ebd 1px solid;
+   color:black;
+   font:13px/1 arial,sans-serif;
+   margin:0;
+   padding:3px 0 0;
+}
+legend {
+   color:#a66;
+   padding:5px;
+   margin:0 0 0 10px;
+}
+legend span {
+   color:red;
+}
+select,input {
+   height:19px;
+}
+option {
+   height:15px;
+   padding:0 0 0 5px;
+}
+
+/* form docedit */
+#form_docedit {
+   margin:10px 5px;
+}
+#form_docedit label {
+   float:left;
+}
+#form_docedit div {
+   background:white;
+   border:1px #7b9ebd solid;
+   color:blue;
+   margin:10px 5px;
+   padding:8px 5px 3px;
+   height:17px;
+}
+#form_docedit div span {
+   float:right;
+}
+#form_docedit div p {
+   float:right;
+   border:1px #7b9ebd solid;
+   border-left:0;
+   margin:-5px 0 0 -11px;
+   padding:5px 2px 0 0;
+   height:16px;
+}
+#form_docedit .docedit {
+   float:right;
+   text-align:right;
+   width:350px;
+   height:21px;
+   background:white;
+   border:1px #7b9ebd solid;
+   border-right:0;
+   color:red;
+   margin:-5px 0 0;
+   padding:0;
+}
+#form_docedit .submit {
+   float:right;
+   width:688px;
+   height:21px;
+   background:white;
+   border:#7b9ebd 1px solid;
+   color:black;
+   font:13px/1 arial,sans-serif;
+   margin:1px 5px 2px 0;
+}
+html:root #form_docedit .docedit {
+   padding:4px 0 1px 3px;
+   height:16px;
+}
+html:root #form_docedit div p {
+   margin:-5px 0 0 -15px;
+   padding:5px 2px 1px 3px;
+   height:15px;
+}
+/* end form docedit */
+
+/* form post */
+#form_post, #form_post2 {
+   margin: 10px 5px;
+}
+#form_post label, #form_post2 label {
+   float:left;
+   font:12px/1 arial;
+   margin:0 10px;
+   padding:7px 0 0 7px;
+}
+#form_post .tema {
+   float:right;
+   width:684px;
+   height:16px;
+   border:1px #7b9ebd solid;
+   margin:0 5px 2px 0;
+   padding:0 0 4px 3px;
+}
+#form_post .date {
+   float:left;
+   width:130px;
+   height:15px;
+   border:1px #7b9ebd solid;
+   color:#a66;
+   margin:0 5px 0 0;
+   padding:1px 0 3px 7px;
+}
+#form_post textarea {
+   float:right;
+   width:677px;
+   height:700px;
+   border:1px #7b9ebd solid;
+   margin:2px 5px 3px 0;
+   padding:5px;
+}
+#form_post select {
+   float:left;
+   width:495px;
+   border:#7b9ebd 1px solid;
+   font:12px arial,sans-serif;
+   margin:0 0 2px 4px;
+   padding:0 0 1px;
+}
+#form_post2 .checkbox_v4 {
+   float:left;
+   border:#7b9ebd 1px solid;
+   font:12px arial,sans-serif;
+   margin:0 0 2px 4px;
+   padding:0 0 1px;
+}
+#form_post2 .txt {
+   border: 1px solid white;
+   font:12px arial,sans-serif;
+   margin: 0 0 2px 4px;
+   padding: 0 0 1px 15px;
+   color: red;
+}
+#form_post2 .tema {
+   float:left;
+   width:455px;
+   border:#7b9ebd 1px solid;
+   font:12px arial,sans-serif;
+   margin:0 0 2px 4px;
+   padding:0 0 1px;
+}
+#form_post2 .tema2 {
+   float:left;
+   width: 385px;
+   border:#7b9ebd 1px solid;
+   font:12px arial,sans-serif;
+   margin: 0 5px 3px 0;
+   padding:0 0 1px;
+}
+#form_post2 select {
+   float:left;
+   border:#7b9ebd 1px solid;
+   font:12px arial,sans-serif;
+   margin:0 0 2px 4px;
+   padding:0 0 1px;
+}
+#form_post .submit,
+#form_post2 .submit {
+   float:right;
+   width:185px;
+   height:21px;
+   background:white;
+   border:#7b9ebd 1px solid;
+   color:#000;
+   font:13px/1 arial,sans-serif;
+   margin:0 4px 2px 0;
+}
+html:root #form_post .tema {padding:3px 0 1px 3px;}
+html:root #form_post2 .tema {padding:0px 0 0px 3px;}
+html:root #form_post .date {padding:3px 0 0 7px;}
+html:root #form_post textarea {width:677px;height:700px;}
+html:root #form_post select {padding:0;height:19px;}
+html:root #form_post .submit,
+html:root #form_post2 .submit {padding:0 0 3px;}
+/* end form post */
+
+/* form edit */
+#form_edit {margin:10px 5px;}
+#form_edit textarea {
+  float:right;
+  margin:2px 5px 3px 0;
+  border:1px #7b9ebd solid;
+  padding:0;
+  width:686px;
+  height:405px;
+}
+html:root #form_edit textarea {width:686px;}
+#form_edit .submit {
+  background:#fff;border:#7b9ebd 1px solid;
+  color:#000;
+  float:right;
+  font:13px/1 arial,sans-serif;
+  margin:1px 5px 3px 0;
+  width:688px;
+  height:21px;
+}
+#form_edit .editcom {
+  border:#7b9ebd 1px solid;
+  color:#000;
+  float:right;
+  font:12px/1 arial,sans-serif;
+  margin:1px 5px 1px 0;
+  padding:1px 0 2px 6px;
+  width:680px;
+  height:15px;
+}
+/* end form edit */
+
+/* comment form */
+#form_comm {margin:10px 5px;}
+#form_comm label {float:left;font:12px/1 arial,sans-serif;padding:7px 0 0 30px;}
+#form_comm .tema,
+#form_comm .name,
+#form_comm .email,
+#form_comm .cod {
+  border:#7b9ebd 1px solid;
+  float:right;
+  margin:0 5px 2px 0;
+  padding:0 0 3px 3px;
+  width:580px;
+  height:15px;
+}
+#form_comm .email,
+#form_comm .cod,
+#form_comm textarea {background:url(../i/pencil.png) 2px 1px no-repeat #fff;}
+#form_comm .email {padding:0 0 3px 22px;width:561px;}
+#form_comm .cod {padding:0 0 3px 22px;width:435px;}
+#form_comm textarea {
+  border:#7b9ebd 1px solid;
+  float:right;
+  margin:2px 5px 2px 0;
+  padding:10px 0 0 22px;
+  border:1px #7b9ebd solid;
+  width:665px;
+  height:165px;
+}
+#form_comm img {
+  border:none;
+  float:right;
+  margin:1px 2px 2px 0;
+  width:320px;
+  height:19px;
+}
+#form_comm .submit {
+  background:#fff;border:#7b9ebd 1px solid;
+  color:#000;
+  float:right;
+  font:13px/1 arial,sans-serif;
+  margin:0 5px 2px 0;
+  width:689px;
+  height:22px;
+}
+html:root #form_comm .tema,
+html:root #form_comm .name {padding:2px 0 0 3px;height:16px;}
+html:root #form_comm .email,
+html:root #form_comm .cod {padding:2px 0 0 22px;height:16px;}
+/* end form comment*/
+
+/* form email */
+#form_email {margin:10px 5px;width:700px}
+#form_email p {margin:0 0 2px;padding:0;}
+#form_email label {float:left;font:12px/1 arial,sans-serif;padding:7px 0 0 25px;margin:2px 0 0;}
+#form_email .tema,
+#form_email .name,
+#form_email .email,
+#form_email .cod {
+  background:url(../i/pencil.png) 2px 1px no-repeat #fff;
+  border:#7b9ebd 1px solid;
+  float:right;
+  margin:0 5px 2px 0;
+  padding:0 0 4px 22px;
+  width:545px;
+  height:15px;
+}
+#form_email .cod {width:415px;}
+#form_email textarea {
+  background:url(../i/pencil.png) 2px 1px no-repeat #fff;
+   border:1px #7b9ebd solid;
+  float:right;
+  margin:0 5px 2px 0;
+  padding:10px 0 0 22px;
+  width:665px;
+  height:165px;
+}
+#form_email img {
+  border:none;
+  float:right;
+  margin:1px 2px 2px 0;
+  width:320px;
+  height:19px;
+}
+#form_email .submit {
+  background:#fff;border:#7b9ebd 1px solid;
+  color:#000;
+  float:right;
+  font:13px/1 arial,sans-serif;
+  margin:0 5px 2px 0;
+  width:689px;
+  height:22px;
+}
+html:root #form_email .tema,
+html:root #form_email .name,
+html:root #form_email .email,
+html:root #form_email .cod {padding:1px 0 0 22px;height:18px;}
+/* end form email*/
+
+/* form friend */
+#form_friend {margin:0 5px;width:700px;}
+#form_friend label {float:left;padding:7px 0 0 20px;}
+#form_friend span {float:left;padding:10px 0 0 10px;}
+#form_friend .tema,
+#form_friend .name,
+#form_friend .email,
+#form_friend .cod {
+  background:url(../i/pencil.png) 2px 1px no-repeat #fff;
+  border:#7b9ebd 1px solid;
+  float:right;
+  margin:0 5px 2px 5px;
+  padding:0 0 3px 22px;
+  width:530px;
+  height:17px;
+}
+#form_friend .cod {width:400px;}
+#form_friend textarea {
+  background:url(../i/pencil.png) 2px 1px no-repeat #fff;
+  border:1px #7b9ebd solid;
+  float:right;
+  margin:2px 5px 2px 0;
+  padding:10px 0 2px 22px;
+  width:530px;
+  height:165px;
+}
+#form_friend img {
+  border:none;
+  float:right;
+  margin:1px 2px 2px 0;
+  width:320px;
+  height:19px;
+}
+#form_friend .submit {
+  background:#fff;border:#7b9ebd 1px solid;
+  color:#000;
+  float:right;
+  font:13px/1 arial;
+  margin:0 5px 2px;
+  width:554px;
+  height:22px;
+}
+html:root #form_friend label {padding:9px 0 0 20px;}
+html:root #form_friend span {padding:22px 0 0 10px;}
+html:root #form_friend .tema,
+html:root #form_friend .name,
+html:root #form_friend .email,
+html:root #form_friend .cod  {padding:2px 0 0 22px;height:18px;}
+/* end form friend */
+
+/* form search */
+#form_search {margin:15px 5px 25px;width:700px;}
+#form_search .search {
+  border:silver 1px solid;
+  background:#efefef;
+  float:left;
+  font:12px arial,sans-serif;
+  margin:10px 0 5px 5px;
+  padding: 1px 3px;
+  width:585px;
+  height:19px;
+}
+#form_search .submit {
+  border:silver 1px solid;
+  background:#ffffff;
+  color:blue;
+  float:right;
+  font:12px arial,sans-serif;
+  margin:10px 5px 5px 0;
+  width:90px;
+  height:23px;
+} 
+html:root #form_search .submit {padding:0 0 2px;}
+/* end form search */
+
+/* form select */
+#form_select {
+  margin:0 0 10px 12px;
+  padding:2px 0;
+  height:19px;
+}
+#form_select .month {
+  background:#fff;
+  border:#7f9db9 1px solid;
+  color:black;
+  float:left;
+  font:12px/1 arial,sans-serif;
+  margin:0 1px 0 0;
+  padding:0;
+  width:80px;
+  height:18px;
+}
+#form_select .god {
+  background:#fff;
+  border:#7f9db9 1px solid;
+  color:black;
+  float:left;
+  font:12px/1 arial,sans-serif;
+  margin:0 1px 0 0;
+  padding:1px 0 0 2px;
+  width:62px;
+  height:18px;
+}
+html:root #form_select .month {width:82px;}
+html:root #form_select .god {width:64px;}
+#form_select .submit {
+  background:#fff;
+  border:silver 1px solid;
+  color:blue;
+  float:left;
+  font:12px/1 arial,sans-serif;
+  padding:0 0 2px;
+  margin:0 0 2px;
+  width:26px;
+  height:20px;
+}
+#form_select .option {
+  background:#fff;
+  border:none;
+  color:black;
+  padding:0 0 0 3px;
+}
+/* end form select */
+
+/* form searsh menu */
+.form {margin:2px 0 4px;}
+.form .search {
+  background:#ffffff; repeat-x #efefef;
+  border:silver 1px solid;
+  color:#000;
+  font:12px arial,sans-serif;
+  margin:0;
+  padding:1px 0 0;
+  text-align:left;
+  width:142px;
+  height:17px;
+}
+.form .submit {
+  background:#ffffff; repeat-x #ffffff; 
+  border:silver 1px solid;
+  color:#000;
+  margin:0;
+  font:12px arial,sans-serif;
+  padding:0 0 4px;
+  width:30px;
+  height:20px;
+}
+.form .search:hover,.form .submit:hover {
+	BORDER: silver 1px solid; BACKGROUND: #ffffff #ffffff repeat-x;COLOR: blue;
+}
+/* end form searsh menu */
+
+/* form google */
+#form_google {margin:15px 5px 25px;width:500px;}
+#form_google a {float:left;margin:10px 0 5px 5px;}
+#form_google .search {
+  border:silver 1px solid;
+  background:#efefef;
+  float:left;
+  font:12px arial,sans-serif;
+  margin:14px 0 5px 10px;
+  padding:1px 3px;
+  width:300px;
+  height:19px;
+}
+#form_google .submit {
+  border:silver 1px solid;
+  background:#ffffff;
+  color:blue;
+  float:right;
+  font:12px arial,sans-serif;
+  margin:14px 5px 5px 0;
+  width:90px;
+  height:23px;
+}
+#form_google div {margin:0 0 0 95px;padding:0 0 10px;}
+#form_google img {border:none;width:75px;height:32px;}
+
+html:root #form_google .submit {padding:0 0 2px;}
+/* end form google */

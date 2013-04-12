@@ -79,7 +79,7 @@
                         "charset":"UTF-8"
                     })
                     $('body').prepend(s);
-                    console.log(s);
+
                 });
                 $('head').prepend($('<link/>', {
                     'href': self.config.liksRoot +self.config.cssLinkPath,
@@ -156,6 +156,10 @@
         getGadgetId: function (name) {
             return $.ajax({
                 url: this.config.urlModels + '?name=' + name +'&wId='+this.widgetId+ "&jsonp=?",
+                success:function(){
+                    alert(111)
+                    'http://dev2.socialmart.ru/widget/get/model?name=Samsung'
+                },
                 dataType: 'jsonp'
             });
         },
@@ -416,7 +420,7 @@
 
                 if(!targ.hasClass('scroll-loaded')){
                    targ.addClass('scroll-loaded').jScrollPane({autoReinitialise:true});
-                    console.log(targ);
+
                 }
             })
 
@@ -428,9 +432,6 @@
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.parent().addClass('lt-ie9');
             }
-
-
-
         }
     };
 
