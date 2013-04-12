@@ -127,6 +127,8 @@
                 self.fillHeader(data, self.templateNames.header);
             });
             self.fetchPricesData().done(function (data) {
+
+
                 self.fillPrices(data.offers, self.templateNames.prices);
             });
             self.fetchImpressionsData().done(function (data) {
@@ -237,6 +239,7 @@
                             .replace('руб', ' &nbsp;');
                     });
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
+                    console.log(d);
                 }
             });
         },
@@ -466,7 +469,7 @@
                     var smw = new SocialMart(frag, options);
                     smw.widgetId = self.widgetID;
                     smw.defaults.liksRoot= self.linksRoot;
-                    console.log(smw.defaults.liksRoot);
+
                     smw.createWidget();
                 })
             });
