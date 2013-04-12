@@ -103,7 +103,6 @@
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
             self.userRegion = this.config.userRegion;
-            self.WidgetId = 11111;///$self.attr('data-id');
 
 
             //self.getGadgetId(this.config.gadgetName).done(function (data) {
@@ -500,6 +499,7 @@
             SocialMartPreBuild.widgetID = $(this).attr('data-widget-id');
             SocialMartPreBuild.searchMode = options.searchMode;
             SocialMartPreBuild.linksRoot = options.linksRoot;
+
             SocialMartPreBuild.init(this, options);
 
             //new SocialMart(this, options).createWidget();
