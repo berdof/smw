@@ -500,7 +500,7 @@
 
         return this.each(function (el, i) {
             SocialMartPreBuild.widgetID = $(this).attr('data-widget-id');
-            SocialMartPreBuild.searchMode = options.searchMode;
+            SocialMartPreBuild.searchMode = 'splitbylat';
             SocialMartPreBuild.linksRoot = options.linksRoot;
 
             SocialMartPreBuild.init(this, options);
