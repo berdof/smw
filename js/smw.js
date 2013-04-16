@@ -25,8 +25,8 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://socialmart.ru/widget/get/model',
-            urlRegions: 'http://socialmart.ru/widget/get/regions',
+            urlModels: 'http://dev2.socialmart.ru/widget/get/model',
+            urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
             userRegion: 1,
             disableRegionSelection: true,
