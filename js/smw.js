@@ -15,7 +15,7 @@
         this.elem = elem;
         this.$elem = $(elem);
         this.options = options;
-        this.widgetId = 71717171717171;
+        this.widgetId = 111111;
         this.metadata = this.$elem.data('plugin-options');
     };
 
@@ -25,10 +25,10 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://dev2.socialmart.ru/widget/get/model',
-            urlRegions: 'http://dev2.socialmart.ru/widget/get/regions',
+            urlModels: '/widget/get/model',
+            urlRegions: '/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
-            userRegion: 1,
+            regionId: 1,
             disableRegionSelection: true,
             scriptsListPath: [
                 'js/libs/jquery.jscrollpane.min.js',
@@ -39,7 +39,8 @@
                 'js/smwVievs.js'
             ],
             cssLinkPath: 'css/style.css',
-            liksRoot: 'http://crucer.ru/widget/'
+            liksRoot: 'http://crucer.ru/widget/',
+            serverUrl:'http://dev2.socialmart.ru'
             //liksRoot: ''
         },
         classNames: {
@@ -98,11 +99,19 @@
             self.config = $.extend({}, this.defaults, this.options,
                 this.metadata);
 
+
+
+            self.config.urlModels= self.config.serverUrl+self.config.urlModels;
+            self.config.urlRegions= self.config.serverUrl+self.config.urlRegions;
+
+
+
+
             self.appendLibraries();
 
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
-            self.userRegion = this.config.userRegion;
+            self.regionId = this.config.regionId;
 
 
             //self.getGadgetId(this.config.gadgetName).done(function (data) {
@@ -123,12 +132,9 @@
             self.$tabsNavItem = $self.find('.' + self.classNames.tabsNavItem);
 
             self.fetchHeaderData().done(function (data) {
-
                 self.fillHeader(data, self.templateNames.header);
             });
             self.fetchPricesData().done(function (data) {
-
-
                 self.fillPrices(data.offers, self.templateNames.prices);
             });
             self.fetchImpressionsData().done(function (data) {
@@ -199,7 +205,7 @@
 
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + '&wId=' + this.widgetId + "&jsonp=?",
+                url: self.config.urlModels + "/impressions?region=" + self.regionId + "&model=" + self.gadgetId + '&wId=' + this.widgetId + "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
                     var rate = 0;
@@ -220,7 +226,7 @@
         fetchHeaderData: function () {
             var self = this;
             return $.ajax({
-                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
+                url: self.config.urlModels + '/info?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     d.prices.avg = self.priceReformat(d.prices.avg);
@@ -230,8 +236,9 @@
         },
         fetchPricesData: function () {
             var self = this;
+            console.log(self.config.urlModels);
             return $.ajax({
-                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
+                url: self.config.urlModels + '/prices?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     $.map(d.offers, function (offer) {
@@ -239,14 +246,14 @@
                             .replace('руб', ' &nbsp;');
                     });
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
-                    console.log(d);
+
                 }
             });
         },
         fetchInfoData: function () {
             var self = this;
             return $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
+                url: self.config.urlModels+'/description?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp'
 
             });
@@ -450,6 +457,7 @@
         widgetID: '',
         searchMode :'splitbylat',
         linksRoot :'http://crucer.ru/widget/',
+        serverUrl:'http://dev2.socialmart.ru',
         init: function (elem, options) {
             var self = this;
             self.elem = elem;
@@ -481,7 +489,7 @@
         getId: function () {
             var self = this;
             return  $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/?name=' + self.title + '&mode='+self.searchMode+"&jsonp=?",
+                url: self.serverUrl+'/widget/get/model/?name=' + self.title + '&mode='+self.searchMode+"&jsonp=?",
                 dataType: 'jsonp'
             });
         },
@@ -490,10 +498,9 @@
                 'data-id': id,
                 'class': 'smw__stuff'
             });
-            //<div data-plugin-options='{"gadgetName": "Apple iPhone 5 16Gb"}' class="smw__stuff"></div>;
         }
 
-    }
+    };
 
     $.fn.SocialMart = function (options) {
 
@@ -502,10 +509,10 @@
             SocialMartPreBuild.widgetID = $(this).attr('data-widget-id');
             SocialMartPreBuild.searchMode = 'splitbylat';
             SocialMartPreBuild.linksRoot = options.linksRoot;
+            SocialMartPreBuild.serverUrl= options.serverUrl;
 
             SocialMartPreBuild.init(this, options);
 
-            //new SocialMart(this, options).createWidget();
         });
     };
 
