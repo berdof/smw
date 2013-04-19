@@ -12,21 +12,19 @@
 
 <body style="margin: 200px auto; width: 600px;">
 
-
 <div data-widget-id='YI1mmuJG' id="smw" class="smw preload"></div>
-<script type="text/javascript" charset="UTF-8" src="http://crucer.ru/widget/js/libs/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="UTF-8" src="http://crucer.ru/widget/js/smw.js"></script>
-<script type="text/javascript">
-    (function () {
-        var title = $(document).find('title').text();
-        $('.smw').SocialMart({
+<script type="text/javascript" charset="UTF-8">
+    function smwInit() {
+        var title = $smwJq(document).find('title').text();
+        $smwJq('.smw').SocialMart({
             title:title,
             serverUrl:'http://dev2.socialmart.ru',
-            linksRoot:'http://crucer.ru/widget/',
+            linksRoot:'/',
             regionId:1
         });
-    })();
+    }
 </script>
+<script type="text/javascript" charset="UTF-8" src="/smw.php" onload="smwInit()"></script>
 
 </body>
 </html>
