@@ -28,7 +28,7 @@
             urlModels: '/widget/get/model',
             urlRegions: '/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
-            regionId: 1,
+            regionId: 213,
             disableRegionSelection: true,
             scriptsListPath: [
                 'js/libs/jquery.jscrollpane.min.js',
@@ -40,7 +40,8 @@
             ],
             cssLinkPath: 'css/style.css',
             liksRoot: 'http://crucer.ru/widget/',
-            serverUrl:'http://dev2.socialmart.ru'
+            serverUrl:'http://socialmart.ru',
+            limit: 3
             //liksRoot: ''
         },
         classNames: {
@@ -453,6 +454,7 @@
 
     var SocialMartPreBuild = {
         title: '',
+        limit: '',
         id: [],
         frag: [],
         elem: '',
@@ -486,12 +488,17 @@
 
         },
         getTitle: function () {
-            return this.title = $smwJq(document).find('title').text();
+            if(!this.title ) {
+                return this.title = $smwJq(document).find('title').text();
+            }
+            else {
+                return this.title;
+            }
         },
         getId: function () {
             var self = this;
             return  $smwJq.ajax({
-                url: self.serverUrl+'/widget/get/model/?name=' + self.title + '&mode='+self.searchMode+"&jsonp=?",
+                url: self.serverUrl+'/widget/get/model/?wId='+self.widgetID+'&name=' + self.title + '&mode='+self.searchMode+"&limit="+self.limit+"&jsonp=?",
                 dataType: 'jsonp'
             });
         },
@@ -512,7 +519,8 @@
             SocialMartPreBuild.searchMode = 'splitbylat';
             SocialMartPreBuild.linksRoot = options.linksRoot;
             SocialMartPreBuild.serverUrl= options.serverUrl;
-
+            SocialMartPreBuild.title= options.title;
+            SocialMartPreBuild.limit = options.limit;
             SocialMartPreBuild.init(this, options);
 
         });

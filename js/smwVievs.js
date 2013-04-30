@@ -15,7 +15,7 @@ var smwSkeleton =
             '</div></div><div class="fl_l">' +
             '<h2 class="smw__stuff-name">{{name}}</h2>' +
             '<div>Средняя цена <span class="smw__stuff-price">{{prices.avg}} руб</span></div>' +
-            '</div><a class="smw__logo fl_r" href="#"></a>' +
+            '</div><a class="smw__logo fl_r" href="http://socialmart.ru" target="_blank"></a>' +
             '</script>' +
             '</div>',
     smwTabNav = '<ul class="smw__tab__nav">' +
@@ -31,7 +31,7 @@ var smwSkeleton =
         '<input autocomplete="off" data-provide="typeaheadSmwMod" data-items="4" type="text" placeholder="Найти город"/>' +
         '<input type="submit" value=""/>' +
         '</form></div></div></div>' +
-        '<div class="ya-info fl_r">Данные - <a href="#"> Яндекс.Маркет</a></div>' +
+        '<div class="ya-info fl_r">Данные - <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>' +
         '</div>',
     smwPriceList = '<div class="smw__prices__list-scroll">' +
         '<table class="smw__prices__list__table">' +

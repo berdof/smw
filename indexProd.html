@@ -13,19 +13,18 @@
 <body style="margin: 200px auto; width: 600px;">
 
 
-<div data-widget-id='YI1mmuJG' id="smw" class="smw preload"></div>
-<script type="text/javascript" charset="UTF-8" src="http://crucer.ru/widget/js/libs/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="UTF-8" src="http://crucer.ru/widget/js/smw.js"></script>
-<script type="text/javascript">
-    (function () {
-        var title = $(document).find('title').text();
-        $('.smw').SocialMart({
-            title:title,
-            serverUrl:'http://socialmart.ru',
-            linksRoot:'http://crucer.ru/widget/',
-            regionId:1
+<div data-widget-id='Iudf6Rt0' id="smw" class="smw preload"></div>
+<script type="text/javascript" charset="UTF-8" src="http://socialmart.ru/widget/1/smw.php"></script>
+<script type="text/javascript" charset="UTF-8">
+    $smwJq('document').ready(function() {
+        $smwJq('.smw').SocialMart({
+            title: $smwJq(document).find("title").text(),
+            serverUrl: 'http://socialmart.ru',
+            linksRoot:'http://socialmart.ru/widget/1/',
+            regionId:213,
+            limit:1
         });
-    })();
+    });
 </script>
 
 </body>
