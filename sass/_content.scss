@@ -109,8 +109,9 @@
 
   .smw__info__name {
     display: block;
-    color: #666;
+    color: #aaa ;
     font-weight: 700;
+
   }
 
   .smw__info__value {
@@ -156,8 +157,10 @@
     padding: 3px 0 0;
     margin: 0 10px 0 0;
     font-size: 13px;
+    font-style: normal !important;
     color: #fff;
     text-shadow: 0 1px 0 #294812;
+
   }
 
   .smw__impression__head__rate_empty {
@@ -187,7 +190,9 @@
   .smw__impression__head__mark {
     font-size: 12px;
     color: #000;
-    padding: 7px 27px 0 0;
+    padding: 0 27px 0 0;
+    position: relative;
+    top: 1px;
   }
 
   .smw__impression__body {
@@ -237,6 +242,7 @@
 
   .smw__impression__list__item__date {
     color: #373737 !important;
+    display: block;
   }
 
 
@@ -517,6 +523,7 @@
 
   .smw__prices__list__all {
     position: relative;
+    text-align: left !important;
   }
 
   .where-to-buy__trigger {
@@ -710,6 +717,7 @@
     padding: 52px 0;
     p {
       padding-bottom: 15px;
+      text-align: center !important;
     }
   }
 

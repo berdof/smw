@@ -7,14 +7,15 @@
  *
  */
 
-;(function ($, window, document, undefined) {
+;
+(function ($smwJq, window, document, undefined) {
 
     // plugin constructor
     var SocialMart = function (elem, options) {
         this.elem = elem;
-        this.$elem = $(elem);
+        this.$elem = $smwJq(elem);
         this.options = options;
-        this.widgetId =71717171717171;
+        this.widgetId = 111111;
         this.metadata = this.$elem.data('plugin-options');
     };
 
@@ -24,10 +25,10 @@
         //list of parameters
         defaults: {
             gadgetName: null,
-            urlModels: 'http://socialmart.ru/widget/get/model',
-            urlRegions: 'http://socialmart.ru/widget/get/regions',
+            urlModels: '/widget/get/model',
+            urlRegions: '/widget/get/regions',
             defaultRegions: ['Москва', 'Санкт-Петербург', 'Красноярск', 'Новосибирск', 'Екатеринбург'],
-            userRegion: 1,
+            regionId: 213,
             disableRegionSelection: true,
             scriptsListPath: [
                 'js/libs/jquery.jscrollpane.min.js',
@@ -38,8 +39,10 @@
                 'js/smwVievs.js'
             ],
             cssLinkPath: 'css/style.css',
-            liksRoot :'http://crucer.ru/mobile/'
-           //liksRoot :''
+            liksRoot: 'http://crucer.ru/widget/',
+            serverUrl:'http://socialmart.ru',
+            limit: 3
+            //liksRoot: ''
         },
         classNames: {
             stuff: 'smw__stuff',
@@ -71,42 +74,53 @@
         appendLibraries: function () {
             var self = this,
                 parent = self.$elem.parent();
+
             if (parent.hasClass('preload')) {
+                if(parent.hasClass('preload-js')) {
+                    $smwJq.each(self.config.scriptsListPath, function (i, link) {
+                        var s = $smwJq('<script></script>', {
+                            "src": self.config.liksRoot + link,
+                            "charset": "UTF-8"
+                        })
 
-                $.each(self.config.scriptsListPath, function (i, link) {
-                    var s =$('<script></script>',{
-                        "src":self.config.liksRoot + link,
-                        "charset":"UTF-8"
-                    })
-                    $('body').prepend(s);
+                        $smwJq('body').prepend(s);
 
-                });
-                $('head').prepend($('<link/>', {
-                    'href': self.config.liksRoot +self.config.cssLinkPath,
+                    });
+                    parent.removeClass('preload-js');
+                }
+                $smwJq('head').prepend($smwJq('<link/>', {
+                    'href': self.config.liksRoot + self.config.cssLinkPath,
                     'rel': 'stylesheet'
                 }));
             }
-            parent.removeClass('preload')
+            parent.removeClass('preload');
         },
         createWidget: function () {
 
             var self = this,
                 $self = this.$elem;
-            self.config = $.extend({}, this.defaults, this.options,
+            self.config = $smwJq.extend({}, this.defaults, this.options,
                 this.metadata);
+
+
+
+            self.config.urlModels= self.config.serverUrl+self.config.urlModels;
+            self.config.urlRegions= self.config.serverUrl+self.config.urlRegions;
+
+
+
 
             self.appendLibraries();
 
             self.gadgetName = this.config.gadgetName;
             self.gadgetIndex = $self.index();
-            self.userRegion = this.config.userRegion;
-            self.WidgetId = this.config.widgetId;
+            self.regionId = this.config.regionId;
 
 
-            self.getGadgetId(this.config.gadgetName).done(function (data) {
-                self.gadgetId = data.model_id;
-                self.init(self, $self);
-            });
+            //self.getGadgetId(this.config.gadgetName).done(function (data) {
+            self.gadgetId = $self.attr('data-id');
+            self.init(self, $self);
+            //});
 
 
         },
@@ -121,7 +135,6 @@
             self.$tabsNavItem = $self.find('.' + self.classNames.tabsNavItem);
 
             self.fetchHeaderData().done(function (data) {
-
                 self.fillHeader(data, self.templateNames.header);
             });
             self.fetchPricesData().done(function (data) {
@@ -142,23 +155,21 @@
             this.attachEvents();
 
             //todo: fade this
-            $('.' + self.classNames.stuff + ':first .' + self.classNames.footer).trigger('click');
+            $smwJq('.' + self.classNames.stuff + ':first .' + self.classNames.footer).trigger('click');
 
             if (self.config.disableRegionSelection)
                 self.$elem.find('.where-to-buy').hide();
-
-
             self.initScroll();
 
 
             return this;
         },
         getGadgetId: function (name) {
-            return $.ajax({
-                url: this.config.urlModels + '?name=' + name +'&wId='+this.widgetId+ "&jsonp=?",
-                success:function(){
-                    alert(111)
-                    'http://dev2.socialmart.ru/widget/get/model?name=Samsung'
+
+            return $smwJq.ajax({
+                url: this.config.urlModels + '?name=' + name + '&wId=' + this.widgetId + "&jsonp=?",
+                success: function () {
+
                 },
                 dataType: 'jsonp'
             });
@@ -166,7 +177,7 @@
 
         fillRegions: function (regions) {
             regionsArr = [];
-            $.each(regions, function () {
+            $smwJq.each(regions, function () {
                 regionsArr.push(this.region);
             });
             //todo: add keys functionality
@@ -179,7 +190,7 @@
 
         fetchRegionsData: function () {
             var self = this;
-            return $.ajax({
+            return $smwJq.ajax({
                 url: self.config.urlRegions + "?jsonp=?",
                 dataType: 'jsonp',
                 success: function (d) {
@@ -196,12 +207,12 @@
         fetchImpressionsData: function () {
 
             var self = this;
-            return $.ajax({
-                url: self.config.urlModels + "/impressions?region=" + self.userRegion + "&model=" + self.gadgetId + '&wId='+this.widgetId+ "&jsonp=?",
+            return $smwJq.ajax({
+                url: self.config.urlModels + "/impressions?region=" + self.regionId + "&model=" + self.gadgetId + '&wId=' + this.widgetId + "&jsonp=?",
                 dataType: 'jsonp',
                 success: function (data) {
                     var rate = 0;
-                    $.each(data.impressions, function () {
+                    $smwJq.each(data.impressions, function () {
                         rate += ~~this.impression.rating;
                         this.classN = this.is_have === 1 ?
                             self.classNames.hasIco :
@@ -217,32 +228,35 @@
 
         fetchHeaderData: function () {
             var self = this;
-            return $.ajax({
-                url: self.config.urlModels + '/info?region=' + self.userRegion + '&model=' + self.gadgetId + '&wId='+this.widgetId+ '&jsonp=?',
+            return $smwJq.ajax({
+                url: self.config.urlModels + '/info?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
                     d.prices.avg = self.priceReformat(d.prices.avg);
+                    self.$elem.find('.smw__stuff__num').after(d.name)
                 }
             });
         },
         fetchPricesData: function () {
             var self = this;
-            return $.ajax({
-                url: self.config.urlModels + '/prices?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
+            console.log(self.config.urlModels);
+            return $smwJq.ajax({
+                url: self.config.urlModels + '/prices?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
-                    $.map(d.offers, function (offer) {
+                    $smwJq.map(d.offers, function (offer) {
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
                     });
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
+
                 }
             });
         },
         fetchInfoData: function () {
             var self = this;
-            return $.ajax({
-                url: 'http://dev2.socialmart.ru/widget/get/model/description?region=' + self.userRegion + '&model=' + self.gadgetId +'&wId='+this.widgetId+  '&jsonp=?',
+            return $smwJq.ajax({
+                url: self.config.urlModels+'/description?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp'
 
             });
@@ -297,10 +311,10 @@
             $elem.find('.smw__info-wrap-scroll').prepend(smwInfo);
         },
         renderFooter: function () {
-            this.$elem.append($('<footer/>', {
+            this.$elem.append($smwJq('<footer/>', {
                 'class': 'smw__footer',
                 'text': this.gadgetName
-            }).prepend($('<span/>', {
+            }).prepend($smwJq('<span/>', {
                     'class': 'smw__stuff__num',
                     'text': this.gadgetIndex + 1
                 })));
@@ -328,23 +342,23 @@
         sorter: function (plugin, container, containerItem, sortType) {
 
             /*containerItem.css({'position': 'relative', 'top': 0});
-            container.css({position: 'relative', height: container.height(), display: 'block'});
-            var iLnH;
-            containerItem.each(function (i, el) {
-                var iY = $(el).position().top;
-                $.data(el, 'h', iY);
-                if (i === 1) iLnH = iY;
-            });*/
+             container.css({position: 'relative', height: container.height(), display: 'block'});
+             var iLnH;
+             containerItem.each(function (i, el) {
+             var iY = $smwJq(el).position().top;
+             $smwJq.data(el, 'h', iY);
+             if (i === 1) iLnH = iY;
+             });*/
             containerItem.tsort('', {data: sortType, order: 'desc'});
             /*.each(function (i, el) {
-             var $El = $(el);
-             var iFr = $.data(el, 'h');
+             var $El = $smwJq(el);
+             var iFr = $smwJq.data(el, 'h');
              var iTo = i * iLnH;
              $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
              });*/
         },
         sortImpressionsHandler: function (e) {
-            var self = $(this) ,
+            var self = $smwJq(this) ,
                 plugin = e.data.self;
             self.closest('ul').find('a').removeClass('active')
                 .end().end()
@@ -365,13 +379,13 @@
         /**event handlers**/
         toggleRedirectPopup: function (speed, toLink, effect) {
 
-            $('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
+            $smwJq('.smwRedirect')[effect || 'fadeToggle'](speed || 200)
                 .find('.redirect__body a').attr('href', toLink);
-                return false;
+            return false;
         },
         redirectLinkHandler: function (e) {
             var self = e.data.self,
-                href = $(this).attr('href');
+                href = $smwJq(this).attr('href');
             self.toggleRedirectPopup(200, href, "fadeToggle");
             e.preventDefault();
         },
@@ -379,8 +393,8 @@
 
             var self = e.data.self,
                 stuffInClass = '.' + self.classNames.stuffIn,
-                stuffIn = $(stuffInClass),
-                stuffInCur = $(this).siblings(stuffInClass);
+                stuffIn = $smwJq(stuffInClass),
+                stuffInCur = $smwJq(this).siblings(stuffInClass);
             stuffIn.not(stuffInCur).slideUp().parent().removeClass('opened');
             stuffInCur.slideDown().parent().addClass('opened');
             setTimeout(function () {
@@ -392,18 +406,19 @@
         tabsItemClickHandler: function (e) {
 
             var self = e.data.self,
-                tabsLi = $(this).parent('li'),
+                tabsLi = $smwJq(this).parent('li'),
                 tabIndex = tabsLi.index(),
                 tabItems = self.$elem.find('.' + self.classNames.tabsContentsItem);
 
             tabItems.hide().eq(tabIndex).show();
             tabsLi.siblings('li').find('a').removeClass('active');
-            $(this).addClass('active');
+            $smwJq(this).addClass('active');
             self.initScroll();
-            $("*[data-sort-type=date]").trigger('click');
+            $smwJq("*[data-sort-type=date]").trigger('click');
 
             self.toggleRedirectPopup(200, "", "fadeOut");
             e.preventDefault();
+            return false;
         },
         initScroll: function () {
             /*this.$elem.find(
@@ -415,11 +430,11 @@
                 '.smw__impression__list-sort:visible,' +
                     ' .smw__info-wrap-scroll:visible, ' +
                     '.smw__prices__list-scroll:visible');
-            $.each(elem, function () {
-                var targ = $(this);
+            $smwJq.each(elem, function () {
+                var targ = $smwJq(this);
 
-                if(!targ.hasClass('scroll-loaded')){
-                   targ.addClass('scroll-loaded').jScrollPane({autoReinitialise:true});
+                if (!targ.hasClass('scroll-loaded')) {
+                    targ.addClass('scroll-loaded').jScrollPane({autoReinitialise: true});
 
                 }
             })
@@ -428,7 +443,7 @@
         /**!event handlers**/
         ieFix: function () {
             //todo: add ie class and delete pseudo comments
-            var browser = $.browser;
+            var browser = $smwJq.browser;
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.parent().addClass('lt-ie9');
             }
@@ -437,18 +452,86 @@
 
     SocialMart.defaults = SocialMart.prototype.defaults;
 
-    $.fn.SocialMart = function (options) {
+    var SocialMartPreBuild = {
+        title: '',
+        limit: '',
+        id: [],
+        frag: [],
+        elem: '',
+        widgetID: '',
+        searchMode :'splitbylat',
+        linksRoot :'http://crucer.ru/widget/',
+        serverUrl:'http://dev2.socialmart.ru',
+        init: function (elem, options) {
+            var self = this;
+            self.elem = elem;
+            self.title = self.getTitle();
+            self.getId().done(function (d) {
+                if ((typeof d.model_id) === 'string') {
+                    self.id.push(d.model_id)
+                }
+                else {
+                    self.id = d.model_id;
+                }
 
-        return this.each(function () {
-            new SocialMart(this, options).createWidget();
+                $smwJq.each(self.id, function (i, el) {
+                    var frag = self.createFrag(el);
+                    self.frag.push(frag);
+                    $smwJq(self.elem).append(frag);
+                    var smw = new SocialMart(frag, options);
+                    smw.widgetId = self.widgetID;
+                    smw.defaults.liksRoot= self.linksRoot;
+
+                    smw.createWidget();
+                })
+            });
+
+        },
+        getTitle: function () {
+            if(!this.title ) {
+                return this.title = $smwJq(document).find('title').text();
+            }
+            else {
+                return this.title;
+            }
+        },
+        getId: function () {
+            var self = this;
+            return  $smwJq.ajax({
+                url: self.serverUrl+'/widget/get/model/?wId='+self.widgetID+'&name=' + self.title + '&mode='+self.searchMode+"&limit="+self.limit+"&jsonp=?",
+                dataType: 'jsonp'
+            });
+        },
+        createFrag: function (id) {
+            return frag = $smwJq("<div></div>", {
+                'data-id': id,
+                'class': 'smw__stuff'
+            });
+        }
+
+    };
+
+    $smwJq.fn.SocialMart = function (options) {
+
+
+        return this.each(function (el, i) {
+            SocialMartPreBuild.widgetID = $smwJq(this).attr('data-widget-id');
+            SocialMartPreBuild.searchMode = 'splitbylat';
+            SocialMartPreBuild.linksRoot = options.linksRoot;
+            SocialMartPreBuild.serverUrl= options.serverUrl;
+            SocialMartPreBuild.title= options.title;
+            SocialMartPreBuild.limit = options.limit;
+            SocialMartPreBuild.init(this, options);
+
         });
     };
 
-})(jQuery, window, document);
+})($smwJq, window, document);
 
 
 /*
  Test queries
+ http://dev2.socialmart.ru/widget/get/model/?name=searchStr&mode=splitbylat
  http://dev2.socialmart.ru/widget/get/model?name=Samsung
  http://dev2.socialmart.ru/widget/get/regions
  http://dev2.socialmart.ru/widget/get/model/info?region=1&model=111

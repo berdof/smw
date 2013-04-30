@@ -43,3 +43,7 @@ $images-spacing: 12px;
 
 
 @import "lt-ie9";
+
+#smw .smw__stuff:first-child .smw__stuff__in{
+  display: block;
+}
