@@ -12,14 +12,20 @@
 
 <body style="margin: 200px auto; width: 600px;">
 
-<div data-widget-id='Iudf6Rt0' id="smw" class="smw preload"></div>
-<script type="text/javascript" charset="UTF-8" src="http://socialmart.ru/widget/1/smw.php"></script>
+<div data-widget-id='Iudf6Rt0' id="smw" class="smw preload preload-js"></div>
+<script type="text/javascript" charset="UTF-8" src="js/libs/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $smwJq = jQuery.noConflict();
+</script>
+<script type="text/javascript" charset="UTF-8" src="js/smw.js"></script>
+<!--<script type="text/javascript" charset="UTF-8" src="http://socialmart.ru/widget/1/smw.php"></script>-->
+
 <script type="text/javascript" charset="UTF-8">
     $smwJq('document').ready(function() {
         $smwJq('.smw').SocialMart({
             title: $smwJq(document).find("title").text(),
             serverUrl: 'http://socialmart.ru',
-            linksRoot:'http://socialmart.ru/widget/1/',
+            linksRoot:'',
             regionId:213,
             limit:1
         });
