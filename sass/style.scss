@@ -1,25 +1,31 @@
-
 @import "settings";
-#smw{
-strong{
-  font-weight: 700;
-}
-  p{
+
+#smw {
+  margin: 0 auto;
+  strong {
+    font-weight: 700;
+  }
+  p {
     text-indent: 0 !important;
     text-align: left;
   }
 }
+
 $images-layout: vertical;
 $images-spacing: 12px;
 @import "images/*.png";
 
 #smw {
-  font-family:  'Trebuchet MS';
+  font-family: 'Trebuchet MS';
   //font-family:  Arial;
   width: 593px;
   border: 1px solid #d4d4d4;
   text-align: left;
+  *{
+    text-align: left;
+  }
 }
+
 @import "header";
 
 @import "content";
@@ -30,7 +36,7 @@ $images-spacing: 12px;
 
 @import "jquery.jscrollpane";
 
-.debug{
+.debug {
   background: indianred;
   border: 1px solid #000;
   @include box-sizing(border-box);
@@ -40,10 +46,8 @@ $images-spacing: 12px;
   top: 0;
 }
 
-
-
 @import "lt-ie9";
 
-#smw .smw__stuff:first-child .smw__stuff__in{
+#smw .smw__stuff:first-child .smw__stuff__in {
   display: block;
 }
