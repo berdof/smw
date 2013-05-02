@@ -5,7 +5,6 @@ $scriptList = array(
     'js/libs/jquery-1.7.1.min.js',
     '$smwJq = jQuery.noConflict();',
     'js/libs/jquery.jscrollpane.min.js',
-    'js/libs/jquery.tinySort.jquery.js',
     'js/libs/typeaheadSmwMod.jquery.js',
     'js/libs/jquery.mousewheel.js',
     'js/libs/handlebars.js',

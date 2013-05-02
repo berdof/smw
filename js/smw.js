@@ -339,23 +339,9 @@
             e.preventDefault();
         },
         /**helpers**/
-        sorter: function (plugin, container, containerItem, sortType) {
 
-            /*containerItem.css({'position': 'relative', 'top': 0});
-             container.css({position: 'relative', height: container.height(), display: 'block'});
-             var iLnH;
-             containerItem.each(function (i, el) {
-             var iY = $smwJq(el).position().top;
-             $smwJq.data(el, 'h', iY);
-             if (i === 1) iLnH = iY;
-             });*/
-            containerItem.tsort('', {data: sortType, order: 'desc'});
-            /*.each(function (i, el) {
-             var $El = $smwJq(el);
-             var iFr = $smwJq.data(el, 'h');
-             var iTo = i * iLnH;
-             $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
-             });*/
+        sorter: function (a,b) {
+            return $smwJq(b).attr('data-'+$smwJq.sortType) - $smwJq(a).attr('data-'+$smwJq.sortType);
         },
         sortImpressionsHandler: function (e) {
             var self = $smwJq(this) ,
@@ -363,12 +349,8 @@
             self.closest('ul').find('a').removeClass('active')
                 .end().end()
                 .addClass('active');
-
-            plugin.sorter(
-                plugin,
-                plugin.$elem.find('.smw__impression__list'),
-                plugin.$elem.find('.smw__impression__list__item'),
-                self.data('sort-type'));
+            $smwJq.sortType = self.data('sort-type');
+            plugin.$elem.find('.smw__impression__list').html(plugin.$elem.find('.smw__impression__list__item').sort(plugin.sorter));
             e.preventDefault();
         },
         priceReformat: function (str) {
