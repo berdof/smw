@@ -69,6 +69,9 @@
             info: 'infoTemplate',
             tabsNav: 'tabsNavTemplate'
         },
+
+        pricesCount: 0,
+
         //append links only once
         //to prevent appending us '.not-preload' class on parent div
         appendLibraries: function () {
@@ -136,9 +139,11 @@
 
             self.fetchHeaderData().done(function (data) {
                 self.fillHeader(data, self.templateNames.header);
+                self.hidePricesIfNoOffers();
             });
             self.fetchPricesData().done(function (data) {
                 self.fillPrices(data.offers, self.templateNames.prices);
+                self.hidePricesIfNoOffers();
             });
             self.fetchImpressionsData().done(function (data) {
                 self.fillImpressions(data, self.templateNames.impressions);
@@ -248,6 +253,7 @@
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
                     });
+                    self.pricesCount = d.offers.length;
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
 
                 }
@@ -429,6 +435,21 @@
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.parent().addClass('lt-ie9');
             }
+        },
+
+        hidePricesIfNoOffers: function() {
+            //Hide prices an avgPrice when no offers
+            if(!this.pricesCount) {
+                this.$elem.find('.smw__header .fl_l div').hide();
+                this.$elem.find('.smw__tab__nav__prices').hide();
+                this.$elem.find('.smw__tab__nav a.smw__tab__nav__info').trigger('click');
+            }
+            else {
+                this.$elem.find('.smw__header .fl_l div').show();
+                this.$elem.find('.smw__tab__nav__prices').show();
+                this.$elem.find('.smw__tab__nav a.smw__tab__nav__prices').trigger('click');
+            }
+
         }
     };
 
