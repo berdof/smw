@@ -69,6 +69,9 @@
             info: 'infoTemplate',
             tabsNav: 'tabsNavTemplate'
         },
+
+        pricesCount: 0,
+
         //append links only once
         //to prevent appending us '.not-preload' class on parent div
         appendLibraries: function () {
@@ -136,9 +139,11 @@
 
             self.fetchHeaderData().done(function (data) {
                 self.fillHeader(data, self.templateNames.header);
+                self.hidePricesIfNoOffers();
             });
             self.fetchPricesData().done(function (data) {
                 self.fillPrices(data.offers, self.templateNames.prices);
+                self.hidePricesIfNoOffers();
             });
             self.fetchImpressionsData().done(function (data) {
                 self.fillImpressions(data, self.templateNames.impressions);
@@ -248,6 +253,7 @@
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
                     });
+                    self.pricesCount = d.offers.length;
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);
 
                 }
@@ -339,23 +345,9 @@
             e.preventDefault();
         },
         /**helpers**/
-        sorter: function (plugin, container, containerItem, sortType) {
 
-            /*containerItem.css({'position': 'relative', 'top': 0});
-             container.css({position: 'relative', height: container.height(), display: 'block'});
-             var iLnH;
-             containerItem.each(function (i, el) {
-             var iY = $smwJq(el).position().top;
-             $smwJq.data(el, 'h', iY);
-             if (i === 1) iLnH = iY;
-             });*/
-            containerItem.tsort('', {data: sortType, order: 'desc'});
-            /*.each(function (i, el) {
-             var $El = $smwJq(el);
-             var iFr = $smwJq.data(el, 'h');
-             var iTo = i * iLnH;
-             $El.css({position: 'absolute', top: iFr}).animate({top: iTo}, 500);
-             });*/
+        sorter: function (a,b) {
+            return $smwJq(b).attr('data-'+$smwJq.sortType) - $smwJq(a).attr('data-'+$smwJq.sortType);
         },
         sortImpressionsHandler: function (e) {
             var self = $smwJq(this) ,
@@ -363,12 +355,8 @@
             self.closest('ul').find('a').removeClass('active')
                 .end().end()
                 .addClass('active');
-
-            plugin.sorter(
-                plugin,
-                plugin.$elem.find('.smw__impression__list'),
-                plugin.$elem.find('.smw__impression__list__item'),
-                self.data('sort-type'));
+            $smwJq.sortType = self.data('sort-type');
+            plugin.$elem.find('.smw__impression__list').html(plugin.$elem.find('.smw__impression__list__item').sort(plugin.sorter));
             e.preventDefault();
         },
         priceReformat: function (str) {
@@ -447,6 +435,21 @@
             if (browser.msie && (browser.version == 8 || browser.version == 7)) {
                 this.$elem.parent().addClass('lt-ie9');
             }
+        },
+
+        hidePricesIfNoOffers: function() {
+            //Hide prices an avgPrice when no offers
+            if(!this.pricesCount) {
+                this.$elem.find('.smw__header .fl_l div').hide();
+                this.$elem.find('.smw__tab__nav__prices').hide();
+                this.$elem.find('.smw__tab__nav a.smw__tab__nav__info').trigger('click');
+            }
+            else {
+                this.$elem.find('.smw__header .fl_l div').show();
+                this.$elem.find('.smw__tab__nav__prices').show();
+                this.$elem.find('.smw__tab__nav a.smw__tab__nav__prices').trigger('click');
+            }
+
         }
     };
 
