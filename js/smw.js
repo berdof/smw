@@ -32,7 +32,6 @@
             disableRegionSelection: true,
             scriptsListPath: [
                 'js/libs/jquery.jscrollpane.min.js',
-                'js/libs/jquery.tinySort.jquery.js',
                 'js/libs/typeaheadSmwMod.jquery.js',
                 'js/libs/jquery.mousewheel.js',
                 'js/libs/handlebars.js',
@@ -244,7 +243,7 @@
         },
         fetchPricesData: function () {
             var self = this;
-            console.log(self.config.urlModels);
+
             return $smwJq.ajax({
                 url: self.config.urlModels + '/prices?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
