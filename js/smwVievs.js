@@ -32,16 +32,25 @@ var smwSkeleton =
         '<input type="submit" value=""/>' +
         '</form></div></div></div>' +
         '' +
-        '</div>',
+        '</div>'+
+        '<div class="smw__prices__list__table-head">' +
+        '<div class="smw__prices__list__cell"><strong>Магазин</strong></div>' +
+        '<div class="smw__prices__list__cell">Рейтинг</div>' +
+        '<div class="smw__prices__list__cell">Доставка</div>' +
+        '<div class="smw__prices__list__cell">Цена</div>' +
+        '</div>'
+    ,
     smwPriceList = '<div class="smw__prices__list-scroll">' +
-        '<table class="smw__prices__list__table">' +
+        '<div class="smw__prices__list__table">' +
         '<script data-id="pricesTemplate" type="text/x-handlebars-template">' +
-        '<tbody>{{#each this}}' +
-        '<tr class="smw__prices__item">' +
-        '<td>{{name}}</td>' +
-        '<td class="smw__prices__item__cost">{{price}}<small>руб</small></td>' +
-        '<td><a class="smw__prices__buy" target="_blank" href="{{clickUrl}}">Купить</a></td>' +
-        '</tr>{{/each }}</tbody></script></table></div>'+
+        '{{#each this}}' +
+        '<div class="smw__prices__item">' +
+        '<div class="smw__prices__list__cell">{{name}}</div>' +
+        '<div class="smw__prices__list__cell"><div class="smw__rate"><span style="width: 40%;"></span></div></div>' +
+        '<div  class="smw__prices__list__cell">Бесплатно</div>' +
+        '<div class="smw__prices__item__cost smw__prices__list__cell">{{price}}<small>руб</small></div>' +
+        '<div  class="smw__prices__list__cell"><a class="smw__prices__buy" target="_blank" href="{{clickUrl}}">Купить</a></div>' +
+        '</div>{{/each }}</script></div></div>'+
         '<div class="ya-info fl_r">Данные предоставлены <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>',
     smwInpressionsHead = '<div class="smw__impression__head">' +
         '{{#if impressions.length }} <i class="smw__impression__head__rate fl_l">{{avgRate}}</i>{{else}} ' +
