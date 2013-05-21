@@ -87,7 +87,7 @@
   .smw__tab__contents__item {
     display: none;
     position: relative;
-    height: 285px;
+    height: 185px;
     overflow: hidden;
     &:first-child {
       display: block;
@@ -199,7 +199,7 @@
 
   }
   .smw__impression__list-sort {
-    height: 233px !important;
+    height: 140px !important;
   }
   .smw__impression__list {
     // height: 208px;
@@ -386,7 +386,7 @@
 
   .smw__prices__list {
     overflow: hidden;
-    height: 285px;
+    height: 185px;
     .jspPane {
       width: 587px !important;
     }
@@ -662,7 +662,7 @@
     padding: 0 12px;
     font-size: 10px;
     font-weight: 300 !important;
-    line-height: 39px;
+    line-height: 25px;
     a {
       text-decoration: none;
       &:hover {
@@ -682,15 +682,15 @@
   }
 
   .smw__info-wrap-scroll {
-    height: 285px;
+    height: 185px;
 
   }
 
   .smw__prices__list-scroll {
-    height: 255px;
+    height: 130px;
     width: 593px !important;
     position: relative;
-    top: -10px;
+   // top: -10px;
   }
   .smwRedirect {
     display: none;
