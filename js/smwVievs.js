@@ -31,7 +31,7 @@ var smwSkeleton =
         '<input autocomplete="off" data-provide="typeaheadSmwMod" data-items="4" type="text" placeholder="Найти город"/>' +
         '<input type="submit" value=""/>' +
         '</form></div></div></div>' +
-        '' +
+        '<div class="ya-info fl_r">Данные предоставлены <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>'+
         '</div>'+
         '<div class="smw__prices__list__table-head">' +
         '<div class="smw__prices__list__cell"><strong>Магазин</strong></div>' +
@@ -50,8 +50,8 @@ var smwSkeleton =
         '<div  class="smw__prices__list__cell">Бесплатно</div>' +
         '<div class="smw__prices__item__cost smw__prices__list__cell">{{price}}<small>руб</small></div>' +
         '<div  class="smw__prices__list__cell"><a class="smw__prices__buy" target="_blank" href="{{clickUrl}}">Купить</a></div>' +
-        '</div>{{/each }}</script></div></div>'+
-        '<div class="ya-info fl_r">Данные предоставлены <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>',
+        '</div>{{/each }}</script></div></div>'
+         ,
     smwInpressionsHead = '<div class="smw__impression__head">' +
         '{{#if impressions.length }} <i class="smw__impression__head__rate fl_l">{{avgRate}}</i>{{else}} ' +
         '<i class="smw__impression__head__rate_empty fl_l">0</i>' +
