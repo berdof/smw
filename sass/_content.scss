@@ -205,7 +205,7 @@
 
   .smw__impression__list__item {
     @extend .clearfix;
-    padding: 11px 15px 6px 10px;
+    padding: 6px 15px 6px 10px;
     font-size: 12px;
     position: relative;
     border-bottom: 1px solid #ededed;
@@ -215,11 +215,13 @@
   .smw__impression__list__item__ava {
     display: block;
     margin: 0 10px 0 0;
+    width: 40px;
+    height: 40px;
   }
 
   .smw__impression__list__item__name {
     text-decoration: none !important;
-    margin: 0 0 5px 0;
+    margin: 0 0 2px 0;
     display: block;
   }
 
@@ -234,7 +236,7 @@
 
   .smw__impression__list__item__text {
     padding: 0 !important;
-    margin: 0 0 5px 0 !important;
+    margin: 0 0 2px 0 !important;
     line-height: 1.4;
   }
 
@@ -498,7 +500,6 @@
         background: #faf8f1;
       }
       .smw__prices__buy {
-
         @include opacity(1);
       }
     }
