@@ -16,8 +16,6 @@
 
   }
 
-
-
   .smw__tab__nav {
     @include horizontal-list(0.5px);
     margin: 0 0 0 10px;
@@ -87,7 +85,7 @@
   .smw__tab__contents__item {
     display: none;
     position: relative;
-    height: 285px;
+    height: 194px;
     overflow: hidden;
     &:first-child {
       display: block;
@@ -109,7 +107,7 @@
 
   .smw__info__name {
     display: block;
-    color: #aaa ;
+    color: #aaa;
     font-weight: 700;
 
   }
@@ -199,15 +197,11 @@
 
   }
   .smw__impression__list-sort {
-    height: 233px !important;
+    height: 148px !important;
   }
-  .smw__impression__list {
-    // height: 208px;
-  }
-
   .smw__impression__list__item {
     @extend .clearfix;
-    padding: 11px 15px 6px 10px;
+    padding: 6px 15px 6px 10px;
     font-size: 12px;
     position: relative;
     border-bottom: 1px solid #ededed;
@@ -217,11 +211,13 @@
   .smw__impression__list__item__ava {
     display: block;
     margin: 0 10px 0 0;
+    width: 40px;
+    height: 40px;
   }
 
   .smw__impression__list__item__name {
     text-decoration: none !important;
-    margin: 0 0 5px 0;
+    margin: 0 0 2px 0;
     display: block;
   }
 
@@ -236,7 +232,7 @@
 
   .smw__impression__list__item__text {
     padding: 0 !important;
-    margin: 0 0 5px 0 !important;
+    margin: 0 0 2px 0 !important;
     line-height: 1.4;
   }
 
@@ -244,7 +240,6 @@
     color: #373737 !important;
     display: block;
   }
-
 
   .smw__impression__list__item:hover .smw__impression__list__item__rate {
     @include opacity(1);
@@ -270,7 +265,7 @@
     }
   }
 
-  .smw__impression__list__item:hover .smw__impression__list__item__nav{
+  .smw__impression__list__item:hover .smw__impression__list__item__nav {
     @include opacity(1);
   }
   .smw__impression__list__item__nav {
@@ -386,7 +381,7 @@
 
   .smw__prices__list {
     overflow: hidden;
-    height: 285px;
+    height: 195px;
     .jspPane {
       width: 587px !important;
     }
@@ -410,8 +405,62 @@
     @include box-sizing(border-box);
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #d1dfec;
-  }
+    .smw__prices__list__cell{
 
+    }
+    .smw__prices__list__l{
+      width: auto !important;
+    }
+  }
+  $images-layout: smart;
+  @import "rate/*.png";
+  .smw__rate {
+    @include rate-sprite(rate1);
+    width: 77px;
+    background-repeat: repeat-x !important;
+    top: 8px;
+    position: relative;
+    span {
+      @include rate-sprite(rate);
+      background-repeat: repeat-x !important;
+      display: block;
+      height: rate-sprite-height(rate);
+    }
+  }
+  $smwPriceCell1: 210px;
+  $smwPriceCell2: 105px;
+  $smwPriceCell3: 85px;
+  $smwPriceCell4: 90px;
+  $smwPriceCell5: 96px;
+  .smw__prices__list__cell {
+    @include box-sizing(border-box);
+    padding: 0 0 0 10px;
+    width: $smwPriceCell1 !important;
+    +.smw__prices__list__cell {
+      width: $smwPriceCell2 !important;
+      +.smw__prices__list__cell {
+        width: $smwPriceCell3 !important;
+        +.smw__prices__list__cell {
+          width: $smwPriceCell4 !important;
+          +.smw__prices__list__cell {
+            width: $smwPriceCell5 !important;
+          }
+        }
+      }
+    }
+  }
+  .smw__prices__list__table-head {
+    @extend .clearfix;
+    @include grad(linear-gradient(top, #f5f9ff, #f5f9ff));
+    @include box-shadow(0 1px 0 #fff inset);
+    @include h-line-height(33px);
+    @include pie;
+    .smw__prices__list__cell {
+      float: left;
+      font-size: 12px;
+      text-align: left;
+    }
+  }
   .smw__prices__list__table {
     width: 592px;
     font-size: 13px;
@@ -425,14 +474,14 @@
       font-weight: 700;
       vertical-align: bottom;
     }
-    td {
-      border-bottom: 1px solid #ededed;
+    .smw__prices__list__cell {
+
       background: #fff;
       padding: 0 0 0 10px;
       @include transition(all 0.3s);
-      &:first-child {
-        width: 405px;
-      }
+      float: left;
+      @include h-line-height(26px);
+      overflow: hidden;
     }
     small {
       font-size: 10px;
@@ -442,12 +491,14 @@
   }
 
   .smw__prices__item {
+    border-bottom: 1px solid #ededed;
+    overflow: hidden;
+    @include h-line-height(25px);
     &:hover {
-      td {
+      .smw__prices__list__cell {
         background: #faf8f1;
       }
       .smw__prices__buy {
-
         @include opacity(1);
       }
     }
@@ -662,7 +713,7 @@
     padding: 0 12px;
     font-size: 10px;
     font-weight: 300 !important;
-    line-height: 39px;
+    line-height: 30px;
     a {
       text-decoration: none;
       &:hover {
@@ -682,15 +733,15 @@
   }
 
   .smw__info-wrap-scroll {
-    height: 285px;
+    height: 195px;
 
   }
 
   .smw__prices__list-scroll {
-    height: 255px;
+    height: 130px;
     width: 593px !important;
     position: relative;
-    top: -10px;
+    // top: -10px;
   }
   .smwRedirect {
     display: none;
