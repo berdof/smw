@@ -2,7 +2,7 @@
   .smw__header {
     @include grad(linear-gradient(top, #f4f4f4, #f5f5f5));
     @include pie;
-    padding: 5px 20px 5px 7px;
+    padding: 3px 20px 3px 5px;
     @extend .clearfix;
     color: #000;
     font-size: 14px;
@@ -21,7 +21,7 @@
   .smw__stuff-name {
     color: #0a3069 !important;
     font-size: 19px !important;
-    padding: 9px 0;
+    padding: 4px 0;
     max-width: 390px;
     overflow: hidden;
   }

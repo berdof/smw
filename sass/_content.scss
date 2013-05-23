@@ -2,7 +2,7 @@
 
   .smw__body {
     position: relative;
-    padding: 9px 0 0;
+    padding:1px 0 0 ;
     a {
       color: #093064;
       text-decoration: underline;
@@ -13,7 +13,7 @@
   }
 
   .smw__tab {
-
+    position: relative;
   }
 
   .smw__tab__nav {
@@ -78,14 +78,14 @@
   }
 
   .smw__tab__contents {
-    padding: 10px 0 0;
+    padding:1px 0 0;
     position: relative;
   }
 
   .smw__tab__contents__item {
     display: none;
     position: relative;
-    height: 194px;
+    height: 155px;
     overflow: hidden;
     &:first-child {
       display: block;
@@ -197,7 +197,7 @@
 
   }
   .smw__impression__list-sort {
-    height: 148px !important;
+    height: 110px !important;
   }
   .smw__impression__list__item {
     @extend .clearfix;
@@ -381,7 +381,7 @@
 
   .smw__prices__list {
     overflow: hidden;
-    height: 195px;
+    height: 163px;
     .jspPane {
       width: 587px !important;
     }
@@ -453,7 +453,7 @@
     @extend .clearfix;
     @include grad(linear-gradient(top, #f5f9ff, #f5f9ff));
     @include box-shadow(0 1px 0 #fff inset);
-    @include h-line-height(33px);
+    @include h-line-height(26px);
     @include pie;
     .smw__prices__list__cell {
       float: left;
@@ -709,6 +709,9 @@
   }
 
   .ya-info {
+    position: absolute;
+    top: -3px;
+    right: 0;
     text-align: right;
     padding: 0 12px;
     font-size: 10px;
@@ -733,7 +736,7 @@
   }
 
   .smw__info-wrap-scroll {
-    height: 195px;
+    height: 155px;
 
   }
 
@@ -750,14 +753,15 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 280px;
+    height: 183px;
     z-index: 10;
     background: #fff;
   }
 
   .redirect__head {
     @extend .smw__impression__head;
-    padding-bottom: 12px;
+    padding-top: 0;
+    padding-bottom: 5px;
   }
 
   .redirect__body {
@@ -765,9 +769,9 @@
     color: #4e4e4e;
     font-size: 16px;
     text-align: center;
-    padding: 52px 0;
+    padding: 12px 0;
     p {
-      padding-bottom: 15px;
+      padding-bottom: 9px;
       text-align: center !important;
     }
   }
