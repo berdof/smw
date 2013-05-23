@@ -600,7 +600,7 @@
   }
 
   .where-to-buy {
-    display: inline-block !important;
+    display: inline-block;
     margin: 0 -11px 0 3px;
     padding: 0 18px 0 4px;
     position: relative;
@@ -736,7 +736,7 @@
   }
 
   .smw__info-wrap-scroll {
-    height: 195px;
+    height: 155px;
 
   }
 
@@ -753,14 +753,15 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 280px;
+    height: 183px;
     z-index: 10;
     background: #fff;
   }
 
   .redirect__head {
     @extend .smw__impression__head;
-    padding-bottom: 12px;
+    padding-top: 0;
+    padding-bottom: 5px;
   }
 
   .redirect__body {
@@ -768,9 +769,9 @@
     color: #4e4e4e;
     font-size: 16px;
     text-align: center;
-    padding: 52px 0;
+    padding: 12px 0;
     p {
-      padding-bottom: 15px;
+      padding-bottom: 9px;
       text-align: center !important;
     }
   }
