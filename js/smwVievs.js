@@ -22,23 +22,26 @@ var smwSkeleton =
         '<li><a class="smw__tab__nav__prices  active" href="javascript:void(0);">Цены <span class="smw__tab__nav__counter"></span> </a></li>' +
         '<li><a class="smw__tab__nav__reviews" href="javascript:void(0);">Впечатления <span class="smw__tab__nav__counter"></span> </a></li>' +
         '<li><a class="smw__tab__nav__info " href="javascript:void(0);">Характеристики</a></li>' +
-        '</ul>',
-    smwPriceHead = '<div class="smw__prices__list__head">' +
+        '</ul>'+
+        '<div class="ya-info">Данные - <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>',
+    smwPriceHead = ' ' +
         '<div class="smw__prices__list__l fl_l">' +
         '<div class="smw__prices__list__all">' +
-        'Все предложения:<div class="where-to-buy "><a class="where-to-buy__trigger" href="javascript:void(0);">Москва</a>' +
+
+
+        '</div></div></div>'+
+        '<div class="smw__prices__list__table-head">' +
+        '<div class="smw__prices__list__cell">' +
+        '<strong>Магазин</strong>' +
+        '<div class="where-to-buy "><a class="where-to-buy__trigger" href="javascript:void(0);">Москва</a>' +
         '<form action="#" class="search">' +
         '<input autocomplete="off" data-provide="typeaheadSmwMod" data-items="4" type="text" placeholder="Найти город"/>' +
         '<input type="submit" value=""/>' +
-        '</form></div></div></div>' +
-        '<div class="ya-info fl_r">Данные предоставлены <a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div>'+
-        '</div>'+
-        '<div class="smw__prices__list__table-head">' +
-        '<div class="smw__prices__list__cell"><strong>Магазин</strong></div>' +
+        '</form></div>' +
+        '</div>' +
         '<div class="smw__prices__list__cell">Рейтинг</div>' +
         '<div class="smw__prices__list__cell">Доставка</div>' +
-        '<div class="smw__prices__list__cell">Цена</div>' +
-        '</div>'
+        '<div class="smw__prices__list__cell">Цена</div>'
     ,
     smwPriceList = '<div class="smw__prices__list-scroll">' +
         '<div class="smw__prices__list__table">' +
@@ -88,7 +91,6 @@ var smwSkeleton =
         '<div class="smw__info-wrap">' +
         '<script data-id="infoTemplate" type="text/x-handlebars-template">' +
             '<div class="clearfix">' +
-                        '<div class="ya-info fl_r">Данные -<a href="http://market.yandex.ru/" target="_blank"> Яндекс.Маркет</a></div></div>'+
             '<div class="clearfix">' +
             '{{#each this}}<div class="smw__info">' +
             '<span class="smw__info__name">{{key}}</span>' +
