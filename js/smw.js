@@ -37,7 +37,7 @@
                 'js/libs/handlebars.js',
                 'js/smwVievs.js'
             ],
-            cssLinkPath: 'css/style.css',
+            cssLinkPath: 'css/style.css?v='+Math.round(+new Date()/1000),
             liksRoot: 'http://crucer.ru/widget/',
             serverUrl:'http://socialmart.ru',
             limit: 3
@@ -236,7 +236,7 @@
                 url: self.config.urlModels + '/info?region=' + self.regionId + '&model=' + self.gadgetId + '&wId=' + this.widgetId + '&jsonp=?',
                 dataType: 'jsonp',
                 success: function (d) {
-                    d.prices.avg = self.priceReformat(d.prices.avg);
+                    d.prices.min = self.priceReformat(d.prices.min);
                     self.$elem.find('.smw__stuff__num').after(d.name)
                 }
             });
@@ -251,6 +251,8 @@
                     $smwJq.map(d.offers, function (offer) {
                         offer.price = self.priceReformat(offer.price)
                             .replace('руб', ' &nbsp;');
+                        offer.shopRatingPercent = offer.shopRating*20;
+
                     });
                     self.pricesCount = d.offers.length;
                     self.$elem.find('.smw__tab__nav__prices .smw__tab__nav__counter').html(d.offers.length);

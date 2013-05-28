@@ -14,7 +14,7 @@ var smwSkeleton =
             '<img src="{{photo}}" alt=""/>' +
             '</div></div><div class="fl_l">' +
             '<h2 class="smw__stuff-name">{{name}}</h2>' +
-            '<div>Средняя цена <span class="smw__stuff-price">{{prices.avg}} руб</span></div>' +
+            '<div>Цена от <span class="smw__stuff-price">{{prices.min}} руб</span></div>' +
             '</div><a class="smw__logo fl_r" href="http://socialmart.ru" target="_blank"></a>' +
             '</script>' +
             '</div>',
@@ -48,9 +48,9 @@ var smwSkeleton =
         '<script data-id="pricesTemplate" type="text/x-handlebars-template">' +
         '{{#each this}}' +
         '<div class="smw__prices__item">' +
-        '<div class="smw__prices__list__cell">{{name}}</div>' +
-        '<div class="smw__prices__list__cell"><div class="smw__rate"><span style="width: 40%;"></span></div></div>' +
-        '<div  class="smw__prices__list__cell">Бесплатно</div>' +
+        '<div class="smw__prices__list__cell"><a class="smw__impression__list__item__name" href="{{clickUrl}}" target="_blank">{{name}}</a></div>' +
+        '<div class="smw__prices__list__cell"><div class="smw__rate"><span style="width: {{shopRatingPercent}}%;"></span></div></div>' +
+        '<div  class="smw__prices__list__cell">{{delivery}}</div>' +
         '<div class="smw__prices__item__cost smw__prices__list__cell">{{price}}<small>руб</small></div>' +
         '<div  class="smw__prices__list__cell"><a class="smw__prices__buy" target="_blank" href="{{clickUrl}}">Купить</a></div>' +
         '</div>{{/each }}</script></div></div>'
