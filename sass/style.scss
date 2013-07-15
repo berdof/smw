@@ -1,6 +1,8 @@
 @import "settings";
 
+
 #smw {
+  @import "compass/reset";
   margin: 0 auto;
   strong {
     font-weight: 700;
@@ -9,12 +11,41 @@
     text-indent: 0 !important;
     text-align: left;
   }
+  * {
+    outline: none;
+  }
+
+
+
+  .clearfix {
+    @include clearfix;
+  }
+
+  .db {
+    display: block;
+  }
+
+  .dib {
+    display: inline-block;
+  }
+
+  .fl_l {
+    float: left !important;
+  }
+
+  .fl_r {
+    float: right !important;
+  }
+
+  .center {
+    overflow: hidden;
+  }
+
+  .tac {
+    text-align: center;
+  }
+
 }
-
-$images-layout: vertical;
-$images-spacing: 12px;
-@import "images/*.png";
-
 #smw {
   font-family: 'Trebuchet MS';
   //font-family:  Arial;

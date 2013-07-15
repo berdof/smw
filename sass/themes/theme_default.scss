@@ -1,0 +1,263 @@
+@import "../settings";
+
+
+@mixin spr($map, $ico) {
+  @include images-sprite($ico);
+  height: images-sprite-height($ico);
+  width: images-sprite-width($ico);
+}
+
+$images-layout: vertical;
+$images-spacing: 12px;
+@import "images/*.png";
+
+#smw {
+  .smw__header {
+    color: #000;
+    @include grad(linear-gradient(top, #f4f4f4, #f5f5f5));
+    @include pie;
+  }
+
+  .smw__stuff-price {
+    color: #005da4;
+  }
+  .smw__stuff-name {
+    color: #0a3069 !important;
+    font-size: 19px !important;
+  }
+
+  .smw__stuff-img {
+    border: 1px solid #e4e4e4;
+    background: #fff;
+  }
+  .smw__logo {
+    @include spr(images, sm-logo);
+  }
+
+  .smw__body {
+    a {
+      color: #093064;
+    }
+  }
+
+  .smw__tab__nav {
+    a {
+      @include grad(linear-gradient(top, #383736, #262626));
+      @include pie;
+      color: #fff;
+      text-shadow: 1px 1px 0 #333230;
+      &.active {
+        @include grad(linear-gradient(top, #274879, #385f99));
+        @include box-shadow(0 1px 0 #1f1f1f inset);
+      }
+    }
+  }
+
+  %smw__tab__nav__ico {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 5px;
+      display: block;
+    }
+  }
+
+  .smw__tab__nav__info {
+    @extend %smw__tab__nav__ico;
+    &:before {
+      @include spr(images, smw__tab__nav-info);
+    }
+  }
+
+  .smw__tab__nav__reviews {
+    @extend %smw__tab__nav__ico;
+    &:before {
+      @include spr(images, smw__tab__nav-reviews);
+    }
+  }
+
+  .smw__tab__nav__prices {
+    @extend %smw__tab__nav__ico;
+    &:before {
+      @include spr(images, smw__tab__nav-prices);
+    }
+  }
+
+
+  .smw__tab__nav__counter {
+    color: #c0bfbf;
+  }
+
+  .smw__info__name {
+    color: #aaa;
+  }
+
+  .smw__info__value {
+    color: #000;
+  }
+  .smw__info__all {
+    color: #004382 !important;
+  }
+
+  .smw__impression__head {
+    background: #f5f9ff;
+    color: #181818;
+  }
+
+
+  .smw__impression__head__rate {
+    @include spr(images, smw__rate);
+    color: #fff;
+    text-shadow: 0 1px 0 #294812;
+    line-height: 28px;
+  }
+
+
+  .smw__impression__head__rate_empty {
+    @include images-sprite(smw__rate2);
+    //todo:replace old sprite
+
+  }
+
+
+  .smw__impression__filter {
+    color: #181818;
+    a {
+      color: #093064;
+    }
+  }
+
+
+  %smw__impression__list__item__ico {
+    line-height: images-sprite-height(smw__review__list__item__tu);
+    &:before {
+      @include spr(images, smw__review__list__item__tu);
+    }
+  }
+
+
+  .smw__impression__list__item__tu {
+    &:before {
+      @include images-sprite(smw__review__list__item__tu1);
+    }
+  }
+
+  .smw__impression__list__item__td {
+    &:before {
+      @include spr(images, smw__review__list__item__td1);
+    }
+  }
+
+  .smw__impression__list__item__comments {
+    &:before {
+      @include spr(images, smw__review__list__item__comments1);
+    }
+
+  }
+
+  .smw__impression__list__item__has {
+    @include spr(images, smw__review__list__item__has);
+  }
+  .smw__impression__list__item__like {
+    @include spr(images, smw__review__list__item__like);
+  }
+
+  .smw__impression__list__item__date {
+    color: #373737 !important;
+  }
+
+  .smw__impression__list__item__rate {
+    height: images-sprite-height(smw__review__list__item__rate);
+    &:before {
+      @include spr(images, smw__review__list__item__rate);
+    }
+  }
+
+  .logo {
+    @include spr(images, logo);
+  }
+
+
+  .smw__prices__list__head {
+    background: #e6f0fe;
+  }
+
+
+  .where-to-buy {
+    input[type=submit]{
+      @include spr(images, search);
+    }
+
+  }
+
+  $images-layout: smart;
+  @import "rate/*.png";
+  .smw__rate {
+    @include rate-sprite(rate1);
+    background-repeat: repeat-x !important;
+    span {
+      @include rate-sprite(rate);
+      background-repeat: repeat-x !important;
+      height: rate-sprite-height(rate);
+    }
+  }
+
+
+  .smw__prices__list__table-head {
+    @include grad(linear-gradient(top, #f5f9ff, #f5f9ff));
+    @include box-shadow(0 1px 0 #fff inset);
+    @include pie;
+  }
+
+  .smw__prices__list__table {
+    color: #000;
+
+    th {
+      //background: #f5f9ff;
+      @include grad(linear-gradient(top, #f5f9ff, #f5f9ff));
+    }
+  }
+
+  .smw__prices__item {
+    &:hover {
+      .smw__prices__list__cell {
+        background: #faf8f1;
+      }
+    }
+  }
+
+
+  .smw__prices__buy {
+    @include grad(linear-gradient(top, #5187b9, #46799b));
+    @include box-shadow(0px 1px 0px #83aacd inset);
+    @include pie;
+    border: 1px solid #637d91;
+    color: #fff !important;
+
+    &:hover {
+      @include grad(linear-gradient(top, #46799b, #5187b9));
+    }
+    &:active {
+      background: #46799b;
+    }
+
+    &:before {
+      left: 8px;
+      top: 7px;
+      @include spr(images, smw__prices__buy);
+    }
+  }
+
+
+  .smw__prices__item__cost {
+    color: #003e7d;
+  }
+
+  th.smw__prices__item__cost {
+    color: #000;
+
+  }
+
+}

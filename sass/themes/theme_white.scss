@@ -1,0 +1,215 @@
+@import "../settings";
+
+@mixin spr($map, $ico) {
+  @include images-white-sprite($ico);
+  height: images-white-sprite-height($ico);
+  width: images-white-sprite-width($ico);
+}
+
+$images-layout: vertical;
+$images-spacing: 12px;
+@import "images-white/*.png";
+
+#smw.smw_default {
+  @include border-radius(10px);
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+
+  .smw__header {
+    @include grad(linear-gradient(top, #f9f9f8, #f9f9f8));
+    background: #f9f9f8;
+    color: #808080;
+    font-size: 12px;
+  }
+  .smw__stuff-name {
+    color: #000 !important;
+    font-size: 18px !important;
+    font-weight: bold;
+  }
+  .smw__stuff-price {
+    font-size: 12px;
+    color: #000;
+  }
+  .smw__stuff-img {
+    background: 0;
+    border: 0;
+  }
+  .smw__logo {
+    @include spr(images, sm-logo2);
+  }
+  .smw__tab__nav {
+    li {
+      border-left: 2px solid #e5e5e4;
+      padding: 0 1px;
+      &:first-child {
+        border-left: 0;
+      }
+    }
+    a {
+      color: #000;
+      font-size: 12px;
+      padding: 0 10px;
+      background: #fdfdfc;
+      text-shadow: 0 0 0 #fdfdfc;
+      &:before {
+        display: none;
+      }
+
+      &.active {
+        background: #0cf;
+        @include box-shadow(0 0 0 #0cf inset);
+        color: #fff;
+        .smw__tab__nav__counter {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .smw__tab__nav__counter {
+    color: #2897d7;
+  }
+  .smw__tab__contents {
+    border-top: 1px solid #d7d7d7;
+    padding: 0;
+    margin: 1px 0 0;
+  }
+  .smw__prices__list__table-head {
+    background: rgba(0, 0, 0, .8);
+    color: #fff;
+    font-size: 12px;
+    @include box-shadow(0 0 0 #3f3f3f inset);
+  }
+  .smw__prices__item {
+    &:hover {
+      .smw__prices__list__cell {
+        background: #f1f0f0;
+      }
+    }
+  }
+  .smw__prices__list__cell {
+    text-transform: none;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  .smw__prices__list__table .smw__prices__list__cell {
+    color: #000;
+    font-size: 12px;
+  }
+  .smw__prices__item__cost {
+    font-weight: 700;
+  }
+  .smw__prices__buy {
+    background: #0cf;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    position: relative;
+    top: 4px;
+    right: 8px;
+    padding: 0 7px;
+    font-size: 12px;
+    text-transform: lowercase;
+  }
+
+  %smw__impression__list__item__ico {
+    line-height: images-sprite-height(smw__review__list__item__tu);
+    &:before {
+      @include spr(images, smw__review__list__item__tu);
+    }
+  }
+
+  .smw__prices__buy {
+
+    background: #01ccff;
+
+    &:before {
+      left: -21px;
+      top: 2px;
+      @include spr(images, smw__prices__buy);
+    }
+  }
+
+  $images-layout: smart;
+  @import "rate-white/*.png";
+  .smw__rate {
+    @include rate-white-sprite(rate1);
+    background-repeat: repeat-x !important;
+    width: 65px !important;
+    margin: 0 auto;
+    span {
+      @include rate-white-sprite(rate);
+      background-repeat: repeat-x !important;
+      height: rate-white-sprite-height(rate);
+    }
+  }
+
+  .smw__impression__list__item__tu {
+    &:before {
+      @include spr(images, smw__review__list__item__tu1);
+    }
+  }
+
+  .smw__impression__list__item__td {
+    &:before {
+      @include spr(images, smw__review__list__item__td1);
+    }
+  }
+
+  .smw__impression__list__item__comments {
+    &:before {
+      @include spr(images, smw__review__list__item__comments1);
+    }
+
+  }
+
+  .smw__impression__list__item__has {
+    @include spr(images, smw__review__list__item__has);
+  }
+  .smw__impression__list__item__like {
+    @include spr(images, smw__review__list__item__like);
+  }
+
+  .smw__impression__head__rate {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0;
+    margin-top: 3px;
+    text-align: center;
+    background: #01cbff;
+  }
+  .smw__impression__head {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.8);
+    color: #fff;
+  }
+  .smw__impression__head__mark{
+    color: #fff;
+  }
+
+  .smw__impression__filter a{
+    color: #fff !important;
+  }
+
+  .smw__impression__list__item__date{
+    color: #373737;
+  }
+  .smw__impression__list__item__rate {
+    height: images-sprite-height(smw__review__list__item__rate);
+    color: #818181;
+    &:before {
+      @include spr(images, smw__review__list__item__rate);
+    }
+  }
+  .smw__impression__list__item__name{
+    color: #0f3c74 !important;
+  }
+  .smw__info__name{
+    color: #666;
+  }
+
+}
