@@ -27,6 +27,7 @@ else {
         }
     }
     $scriptContent = ob_get_contents();
+    $scriptContent = str_replace("'css/style.css?v='+Math.round(+new Date()/1000)","'css/style.css?v=".filemtime(__DIR__.'/css/style.css')."'",$scriptContent);
     file_put_contents('readyscript/smw.js',$scriptContent);
     ob_end_flush();
     exit;
