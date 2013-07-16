@@ -41,6 +41,7 @@ $images-spacing: 12px;
   }
 
   .smw__tab__nav {
+
     a {
       @include grad(linear-gradient(top, #383736, #262626));
       @include pie;

@@ -10,7 +10,7 @@ $images-layout: vertical;
 $images-spacing: 12px;
 @import "images-white/*.png";
 
-#smw.smw_default {
+#smw {
   @include border-radius(10px);
   overflow: hidden;
   border: 1px solid #cfcfcf;
@@ -38,6 +38,7 @@ $images-spacing: 12px;
     @include spr(images, sm-logo2);
   }
   .smw__tab__nav {
+    margin-left: 1px;
     li {
       border-left: 2px solid #e5e5e4;
       padding: 0 1px;
@@ -90,9 +91,9 @@ $images-spacing: 12px;
     text-transform: none;
     font-weight: 300;
     color: #fff;
-    text-align: center;
+    text-align: center !important;
     &:first-child {
-      text-align: left;
+      text-align: left !important;
     }
   }
 
@@ -189,6 +190,7 @@ $images-spacing: 12px;
   }
   .smw__impression__head__mark{
     color: #fff;
+    top: -1px;
   }
 
   .smw__impression__filter a{
@@ -206,7 +208,7 @@ $images-spacing: 12px;
     }
   }
   .smw__impression__list__item__name{
-    color: #0f3c74 !important;
+    color: #000 !important;
   }
   .smw__info__name{
     color: #666;
